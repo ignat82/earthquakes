@@ -1,7 +1,7 @@
-
+package com.example.earthquakes;
 /**
  * Find N-closest quakes
- * 
+ *
  * @author Duke Software/Learn to Program
  * @version 1.0, November 2015
  */
@@ -14,6 +14,7 @@ public class ClosestQuakes {
         // TO DO
 
         return ret;
+
     }
 
     public void findClosestQuakes() {
@@ -33,5 +34,5 @@ public class ClosestQuakes {
         }
         System.out.println("number found: "+close.size());
     }
-    
+
 }

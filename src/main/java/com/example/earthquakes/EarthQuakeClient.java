@@ -1,5 +1,6 @@
-import java.util.*;
-import edu.duke.*;
+package com.example.earthquakes;
+
+import java.util.ArrayList;
 
 public class EarthQuakeClient {
     public EarthQuakeClient() {
@@ -54,7 +55,7 @@ public class EarthQuakeClient {
         Location city = new Location(35.988, -78.907);
 
         // This location is Bridgeport, CA
-        // Location city =  new Location(38.17, -118.82);
+        // com.example.earthquakes.Location city =  new com.example.earthquakes.Location(38.17, -118.82);
 
         // TODO
     }
@@ -70,5 +71,5 @@ public class EarthQuakeClient {
             System.out.println(qe);
         }
     }
-    
+
 }

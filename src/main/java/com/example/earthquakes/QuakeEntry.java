@@ -1,3 +1,4 @@
+package com.example.earthquakes;
 
 public class QuakeEntry implements Comparable<QuakeEntry> {
     private Location myLocation;
@@ -5,7 +6,7 @@ public class QuakeEntry implements Comparable<QuakeEntry> {
     private double depth;
     private double magnitude;
 
-    public QuakeEntry(double lat, double lon, double mag, 
+    public QuakeEntry(double lat, double lon, double mag,
     String t, double d) {
         myLocation = new Location(lat,lon);
 
