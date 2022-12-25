@@ -7,6 +7,7 @@ import lombok.Setter;
 @Setter
 public class EarthQuakeModel {
     private String source;
+    private String message;
 
     public String toString() {
         return String.format("source - %s", source);

@@ -1,5 +1,7 @@
 package com.example.earthquakes;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -12,8 +14,9 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 
+@Component
+@Slf4j
 public class EarthQuakeParser {
     public EarthQuakeParser() {
         // TODO Auto-generated constructor stub
@@ -28,13 +31,14 @@ public class EarthQuakeParser {
             //Document document = builder.parse(new File(source));
             //Document document = builder.parse("http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.atom");
             Document document = null;
-
+            log.info("prepared to parse");
             if (source.startsWith("http")){
                 document = builder.parse(source);
             }
             else {
                 document = builder.parse(new File(source));
             }
+            log.info("parsed file");
             //Document document = builder.parse("http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom");
 
             NodeList nodeList = document.getDocumentElement().getChildNodes();
@@ -91,29 +95,29 @@ public class EarthQuakeParser {
             return list;
         }
         catch (ParserConfigurationException pce){
-            System.err.println("parser configuration exception");
+            log.error("parser configuration exception");
         }
         catch (SAXException se){
-            System.err.println("sax exception");
+            log.error("sax exception");
         }
         catch (IOException ioe){
-            System.err.println("ioexception");
+            log.error("ioexception");
         }
         return null;
     }
 
-    public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException{
-        EarthQuakeParser xp = new EarthQuakeParser();
-        //String source = "data/2.5_week.atom";
-        //String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
-        String source = "data/nov20quakedata.atom";
-        ArrayList<QuakeEntry> list  = xp.read(source);
-        Collections.sort(list);
-        for(QuakeEntry loc : list){
-            System.out.println(loc);
-        }
-        System.out.println("# quakes = "+list.size());
-
-    }
+//    public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException{
+//        EarthQuakeParser xp = new EarthQuakeParser();
+//        //String source = "data/2.5_week.atom";
+//        //String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
+//        String source = "data/nov20quakedata.atom";
+//        ArrayList<QuakeEntry> list  = xp.read(source);
+//        Collections.sort(list);
+//        for(QuakeEntry loc : list){
+//            System.out.println(loc);
+//        }
+//        System.out.println("# quakes = "+list.size());
+//
+//    }
 
 }
