@@ -1,0 +1,11 @@
+<html>
+<head><title>Earthquake</title></head>
+<body>
+<h3>Main method</h3>
+<form action="#" th:action="@{/earthquake}" th:object="${earthQuakeModel}"
+      method="post">
+    <input type="text" th:field="*{source}">
+    <input type="submit" value="submit"/><input type="reset" value="Reset"/>
+</form>
+</body>
+</html>
