@@ -1,4 +1,4 @@
-package com.example.earthquakes;
+package com.example.earthquakes.entities;
 
 public class QuakeEntry implements Comparable<QuakeEntry> {
     private Location myLocation;

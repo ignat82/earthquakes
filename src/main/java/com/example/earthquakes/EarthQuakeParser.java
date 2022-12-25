@@ -1,5 +1,6 @@
 package com.example.earthquakes;
 
+import com.example.earthquakes.entities.QuakeEntry;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;

@@ -6,6 +6,9 @@ package com.example.earthquakes;
  * @version 1.0, November 2015
  */
 
+import com.example.earthquakes.entities.Location;
+import com.example.earthquakes.entities.QuakeEntry;
+
 import java.util.*;
 
 public class ClosestQuakes {
@@ -24,7 +27,7 @@ public class ClosestQuakes {
         ArrayList<QuakeEntry> list  = parser.read(source);
         System.out.println("read data for "+list.size());
 
-        Location jakarta  = new Location(-6.211,106.845);
+        Location jakarta  = new Location(-6.211, 106.845);
 
         ArrayList<QuakeEntry> close = getClosest(list,jakarta,10);
         for(int k=0; k < close.size(); k++){

@@ -1,6 +1,10 @@
 package com.example.earthquakes;
 
+import com.example.earthquakes.entities.Location;
+import com.example.earthquakes.entities.QuakeEntry;
+
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class EarthQuakeClient {
     public EarthQuakeClient() {
@@ -8,7 +12,7 @@ public class EarthQuakeClient {
     }
 
     public ArrayList<QuakeEntry> filterByMagnitude(ArrayList<QuakeEntry> quakeData,
-    double magMin) {
+                                                   double magMin) {
         ArrayList<QuakeEntry> answer = new ArrayList<QuakeEntry>();
         // TODO
 
@@ -16,12 +20,14 @@ public class EarthQuakeClient {
     }
 
     public ArrayList<QuakeEntry> filterByDistanceFrom(ArrayList<QuakeEntry> quakeData,
-    double distMax,
-    Location from) {
-        ArrayList<QuakeEntry> answer = new ArrayList<QuakeEntry>();
+                                                      double distMax,
+                                                      Location from) {
+        // ArrayList<QuakeEntry> answer = new ArrayList<QuakeEntry>();
         // TODO
 
-        return answer;
+        return quakeData.stream()
+                        .filter(e -> e.getLocation().distanceTo(from) < distMax)
+                        .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public void dumpCSV(ArrayList<QuakeEntry> list){
@@ -55,7 +61,7 @@ public class EarthQuakeClient {
         Location city = new Location(35.988, -78.907);
 
         // This location is Bridgeport, CA
-        // com.example.earthquakes.Location city =  new com.example.earthquakes.Location(38.17, -118.82);
+        // com.example.earthquakes.entities.Location city =  new com.example.earthquakes.entities.Location(38.17, -118.82);
 
         // TODO
     }
