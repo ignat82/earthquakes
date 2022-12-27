@@ -50,4 +50,12 @@ public class QuakeEntry implements Comparable<QuakeEntry> {
         return String.format("(%3.2f, %3.2f), mag = %3.2f, depth = %3.2f, title = %s", myLocation.getLatitude(),myLocation.getLongitude(),magnitude,depth,title);
     }
 
+    public static QuakeEntry copy(QuakeEntry original) {
+        return new QuakeEntry(original.getLocation().getLatitude(),
+                              original.getLocation().getLongitude(),
+                              original.getMagnitude(),
+                              original.getInfo(),
+                              original.getDepth());
+    }
+
 }

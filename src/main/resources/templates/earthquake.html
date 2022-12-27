@@ -1,12 +1,19 @@
 <html>
 <head><title>Earthquake</title></head>
 <body>
-<h3>Main method</h3>
-<form action="#" th:action="@{/earthquake}" th:object="${earthQuakeModel}"
+<h3>Acquiring QuakeEntries from source</h3>
+<pre th:if="${entries.entriesPresent}">
+    quake entries ready</pre>
+<pre th:if="${!entries.entriesPresent}" th:style="'color:red;'">
+    quake entries missing</pre>
+<form action="#" th:action="@{/earthquake/entries}" th:object="${entries}"
       method="post">
-    <input type="text" width="200" th:field="*{source}">
-    <input type="submit" value="submit"/><input type="reset" value="Reset"/>
-    <pre th:text="*{message}"></pre>
+    <label> patch to the source file<br>
+        <input type="text" width="200" th:field="*{source}">
+    </label><br>
+    <br><input type="submit" value="submit"/><input type="reset" value="Reset"/>
 </form>
+<a th:href="@{~/earthquake/closest}">closest to</a><br>
+<a th:href="@{~/earthquake/magnitude}">magnitude</a>
 </body>
 </html>

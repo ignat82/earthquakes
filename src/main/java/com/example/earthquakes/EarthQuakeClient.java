@@ -2,10 +2,12 @@ package com.example.earthquakes;
 
 import com.example.earthquakes.entities.Location;
 import com.example.earthquakes.entities.QuakeEntry;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+@Component
 public class EarthQuakeClient {
     public EarthQuakeClient() {
         // TODO Auto-generated constructor stub
@@ -13,10 +15,11 @@ public class EarthQuakeClient {
 
     public ArrayList<QuakeEntry> filterByMagnitude(ArrayList<QuakeEntry> quakeData,
                                                    double magMin) {
-        ArrayList<QuakeEntry> answer = new ArrayList<QuakeEntry>();
         // TODO
 
-        return answer;
+        return quakeData.stream()
+                        .filter(q -> q.getMagnitude() > magMin)
+                        .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public ArrayList<QuakeEntry> filterByDistanceFrom(ArrayList<QuakeEntry> quakeData,
@@ -42,11 +45,11 @@ public class EarthQuakeClient {
 
     }
 
-    public void bigQuakes() {
+    public void bigQuakes(double magMin) {
         EarthQuakeParser parser = new EarthQuakeParser();
         //String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
         String source = "data/nov20quakedata.atom";
-        ArrayList<QuakeEntry> list  = parser.read(source);
+        ArrayList<QuakeEntry> list  = filterByMagnitude(parser.read(source), magMin);
         System.out.println("read data for "+list.size()+" quakes");
 
     }
