@@ -5,12 +5,11 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Entries {
+public class Entries extends AbstractForm {
     private String source;
-    private boolean entriesPresent;
 
     public String toString() {
         return String.format("source - %s, entries present - %s",
-                             source, entriesPresent);
+                             source, isEntriesPresent());
     }
 }

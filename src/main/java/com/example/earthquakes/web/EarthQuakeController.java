@@ -1,5 +1,6 @@
 package com.example.earthquakes.web;
 
+import com.example.earthquakes.entities.Location;
 import com.example.earthquakes.entities.QuakeEntry;
 import com.example.earthquakes.adapter.WebAdapter;
 import com.example.earthquakes.web.formdata.DistanceFilter;
@@ -37,16 +38,12 @@ public class EarthQuakeController {
         log.info("form data received {}", form);
         Optional<List<QuakeEntry>> parcedQuakeEntries
                 = webAdapter.getEntriesFromFile(form.getSource());
-        if (parcedQuakeEntries.isEmpty() && webAdapter.getQuakeEntries().isEmpty()) {
-            return EARTHQUAKE_TEMPLATE;
-        } else
-            parcedQuakeEntries.ifPresent(quakeEntries -> webAdapter.setQuakeEntries(Optional.of(
-                    quakeEntries.stream()
-                                .map(QuakeEntry::copy)
-                                .collect(Collectors.toCollection(ArrayList::new)))));
+        parcedQuakeEntries.ifPresent(q -> webAdapter.setQuakeEntries(Optional.of(
+                q.stream().map(QuakeEntry::copy)
+                 .collect(Collectors.toCollection(ArrayList::new)))));
+        form.setFormInvalid(parcedQuakeEntries.isEmpty());
         form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());
-        log.info("entries set are:");
-        webAdapter.getQuakeEntries().get().forEach(e -> log.info(e.toString()));
+        webAdapter.getQuakeEntries().ifPresent(q -> q.forEach(e -> log.info(e.toString())));
         return EARTHQUAKE_TEMPLATE;
     }
 
@@ -62,17 +59,15 @@ public class EarthQuakeController {
         log.info("form data received {}", form);
         Optional<List<QuakeEntry>> filteredQuakeEntries = Optional.empty();
         try {
-            Double.parseDouble(form.getLatitude());
-            Double.parseDouble(form.getLongitude());
-            filteredQuakeEntries = webAdapter.filterByMagnitude(form.getMagnitude());
+            double lat = Double.parseDouble(form.getLatitude());
+            double lon = Double.parseDouble(form.getLongitude());
+            double dist = Double.parseDouble(form.getDistance());
+            filteredQuakeEntries
+                    = webAdapter.filterByDistance(new Location(lat, lon), dist);
         } catch (Exception e) {
             form.setFormInvalid(true);
         }
-
-        if (filteredQuakeEntries.isPresent()) {
-            //form.setFormInvalid(false);
-            filteredQuakeEntries.stream().forEach(e -> log.info(e.toString()));
-        }
+        filteredQuakeEntries.ifPresent(e -> log.info(e.toString()));
         return CLOSEST_TEMPLATE;
     }
 

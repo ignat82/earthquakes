@@ -7,11 +7,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class DistanceFilter {
+public class DistanceFilter extends AbstractForm {
     private String latitude;
     private String longitude;
     private String distance;
-    private boolean formInvalid;
-    private boolean entriesPresent;
-
 }

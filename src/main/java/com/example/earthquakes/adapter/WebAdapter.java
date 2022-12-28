@@ -4,7 +4,6 @@ import com.example.earthquakes.EarthQuakeClient;
 import com.example.earthquakes.EarthQuakeParser;
 import com.example.earthquakes.entities.Location;
 import com.example.earthquakes.entities.QuakeEntry;
-import com.example.earthquakes.web.formdata.DistanceFilter;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -43,14 +42,8 @@ public class WebAdapter {
         return Optional.ofNullable(quakeEntries);
     }
 
-    public Optional<List<QuakeEntry>> filterByDistance(DistanceFilter form) {
-        if (quakeEntries.isEmpty()) {
-            return Optional.empty();
-        }
-        Location location = new Location(
-                Double.parseDouble(form.getLatitude()),
-                Double.parseDouble(form.getLongitude()));
-        return Optional.empty();
+    public Optional<List<QuakeEntry>> filterByDistance(Location location, double dist) {
+        return quakeEntries.map(q -> earthQuakeClient.filterByDistanceFrom(q, dist, location));
     }
 
     public Optional<List<QuakeEntry>> filterByMagnitude(String magMin) {

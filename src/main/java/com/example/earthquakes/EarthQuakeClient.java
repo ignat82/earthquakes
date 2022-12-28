@@ -64,7 +64,7 @@ public class EarthQuakeClient {
         Location city = new Location(35.988, -78.907);
 
         // This location is Bridgeport, CA
-        // com.example.earthquakes.entities.Location city =  new com.example.earthquakes.entities.Location(38.17, -118.82);
+        // Location city =  new Location(38.17, -118.82);
 
         // TODO
     }

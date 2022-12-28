@@ -13,7 +13,9 @@
     </label><br>
     <br><input type="submit" value="submit"/><input type="reset" value="Reset"/>
 </form>
-<a th:href="@{~/earthquake/closest}">closest to</a><br>
+<pre th:if="${entries.formInvalid}" th:style="'color:red;'">
+    form data invalid or no entries found</pre>
+<a th:href="@{~/earthquake/closest}">distance</a><br>
 <a th:href="@{~/earthquake/magnitude}">magnitude</a>
 </body>
 </html>

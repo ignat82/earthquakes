@@ -7,8 +7,6 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class MagnitudeFilter {
+public class MagnitudeFilter extends AbstractForm{
     private String magnitude;
-    private boolean formInvalid;
-    private boolean entriesPresent;
 }
