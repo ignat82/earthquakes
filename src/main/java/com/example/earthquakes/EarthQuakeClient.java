@@ -14,11 +14,20 @@ public class EarthQuakeClient {
     }
 
     public ArrayList<QuakeEntry> filterByMagnitude(ArrayList<QuakeEntry> quakeData,
-                                                   double magMin) {
+                                                   double magMin ) {
         // TODO
-
         return quakeData.stream()
                         .filter(q -> q.getMagnitude() > magMin)
+                        .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public ArrayList<QuakeEntry> filterByDepth(ArrayList<QuakeEntry> quakeData,
+                                               double minDepth,
+                                               double maxDepth) {
+        // TODO
+        return quakeData.stream()
+                        .filter(q -> q.getDepth() > minDepth &&
+                                q.getDepth() < maxDepth)
                         .collect(Collectors.toCollection(ArrayList::new));
     }
 
@@ -27,7 +36,6 @@ public class EarthQuakeClient {
                                                       Location from) {
         // ArrayList<QuakeEntry> answer = new ArrayList<QuakeEntry>();
         // TODO
-
         return quakeData.stream()
                         .filter(e -> e.getLocation().distanceTo(from) < distMax)
                         .collect(Collectors.toCollection(ArrayList::new));

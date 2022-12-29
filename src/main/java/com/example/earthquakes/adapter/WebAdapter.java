@@ -5,7 +5,6 @@ import com.example.earthquakes.EarthQuakeParser;
 import com.example.earthquakes.entities.Location;
 import com.example.earthquakes.entities.QuakeEntry;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -16,42 +15,70 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static com.example.earthquakes.Constants.SOURCE_FILE_LOCATION;
+
 @Component
-@RequiredArgsConstructor
 @Slf4j
 @Getter
 @Setter
 public class WebAdapter {
     private final EarthQuakeParser earthQuakeParser;
     private final EarthQuakeClient earthQuakeClient;
-    //private final ClosestQuakes closestQuakes;
-    private Optional<ArrayList<QuakeEntry>> quakeEntries = Optional.empty();
+    private Optional<ArrayList<QuakeEntry>> quakeEntries;
 
-    public Optional<List<QuakeEntry>> getEntriesFromFile(String relativePath) {
-        String path;
-        try {
-            URL res = getClass().getClassLoader().getResource(relativePath);
-            path = Paths.get(res.toURI()).toFile().getAbsolutePath();
-        } catch (Exception e) {
-            log.error("failed to acquire absolute patch");
-            return Optional.empty();
-        }
-        log.info("got path {}", path);
-        List<QuakeEntry> quakeEntries = earthQuakeParser.read(path);
-        log.info("got entries");
-        return Optional.ofNullable(quakeEntries);
+    public WebAdapter(EarthQuakeParser earthQuakeParser, EarthQuakeClient earthQuakeClient) {
+        this.earthQuakeParser = earthQuakeParser;
+        this.earthQuakeClient = earthQuakeClient;
+        quakeEntries = getEntriesFromFile(SOURCE_FILE_LOCATION);
     }
 
-    public Optional<List<QuakeEntry>> filterByDistance(Location location, double dist) {
-        return quakeEntries.map(q -> earthQuakeClient.filterByDistanceFrom(q, dist, location));
+    public Optional<ArrayList<QuakeEntry>> getEntriesFromFile(String relativePath) {
+        try {
+            URL res = getClass().getClassLoader().getResource(relativePath);
+            String path = Paths.get(res.toURI()).toFile().getAbsolutePath();
+            log.info("got path {}", path);
+            ArrayList<QuakeEntry> quakeEntries = earthQuakeParser.read(path);
+            log.info("got entries");
+            return Optional.of(quakeEntries);
+        } catch (Exception e) {
+            log.error("failed to acquire absolute patch. exception is {}", e.toString());
+            return Optional.empty();
+        }
+    }
+
+    public Optional<List<QuakeEntry>> filterByDepth(String minDepth,
+                                                    String maxDepth) {
+        try {
+            double min = Double.parseDouble(minDepth);
+            double max = Double.parseDouble(maxDepth);
+            return quakeEntries
+                    .map(q -> earthQuakeClient.filterByDepth(q, min, max));
+        } catch (Exception e) {
+            return Optional.empty();
+        }
+    }
+
+    public Optional<List<QuakeEntry>> filterByDistance(String lattitude,
+                                                       String longituge,
+                                                       String distance) {
+        try {
+            double lat = Double.parseDouble(lattitude);
+            double lon = Double.parseDouble(longituge);
+            double dist = Double.parseDouble(distance);
+            Location location = new Location(lat, lon);
+            return quakeEntries
+                    .map(q -> earthQuakeClient.filterByDistanceFrom(q, dist, location));
+        } catch (Exception e) {
+            return Optional.empty();
+        }
     }
 
     public Optional<List<QuakeEntry>> filterByMagnitude(String magMin) {
-        if (quakeEntries.isEmpty()) {
+        try {
+            return quakeEntries
+                    .map(q -> earthQuakeClient.filterByMagnitude(q, Double.parseDouble(magMin)));
+        } catch (Exception e) {
             return Optional.empty();
         }
-        return Optional.ofNullable(
-                earthQuakeClient.filterByMagnitude(
-                        quakeEntries.get(), Double.parseDouble(magMin)));
     }
 }

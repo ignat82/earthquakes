@@ -1,8 +1,8 @@
 package com.example.earthquakes.web;
 
-import com.example.earthquakes.entities.Location;
-import com.example.earthquakes.entities.QuakeEntry;
 import com.example.earthquakes.adapter.WebAdapter;
+import com.example.earthquakes.entities.QuakeEntry;
+import com.example.earthquakes.web.formdata.DepthFilter;
 import com.example.earthquakes.web.formdata.DistanceFilter;
 import com.example.earthquakes.web.formdata.Entries;
 import com.example.earthquakes.web.formdata.MagnitudeFilter;
@@ -17,9 +17,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.example.earthquakes.Constants.CLOSEST_TEMPLATE;
-import static com.example.earthquakes.Constants.EARTHQUAKE_TEMPLATE;
-import static com.example.earthquakes.Constants.MAGNITUDE_TEMPLATE;
+import static com.example.earthquakes.Constants.*;
 
 @Slf4j
 @Controller
@@ -36,7 +34,7 @@ public class EarthQuakeController {
     @PostMapping("/earthquake/entries")
     public String postEntries(Entries form) {
         log.info("form data received {}", form);
-        Optional<List<QuakeEntry>> parcedQuakeEntries
+        Optional<ArrayList<QuakeEntry>> parcedQuakeEntries
                 = webAdapter.getEntriesFromFile(form.getSource());
         parcedQuakeEntries.ifPresent(q -> webAdapter.setQuakeEntries(Optional.of(
                 q.stream().map(QuakeEntry::copy)
@@ -57,42 +55,45 @@ public class EarthQuakeController {
     public String postClosest(DistanceFilter form) {
         form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());
         log.info("form data received {}", form);
-        Optional<List<QuakeEntry>> filteredQuakeEntries = Optional.empty();
-        try {
-            double lat = Double.parseDouble(form.getLatitude());
-            double lon = Double.parseDouble(form.getLongitude());
-            double dist = Double.parseDouble(form.getDistance());
-            filteredQuakeEntries
-                    = webAdapter.filterByDistance(new Location(lat, lon), dist);
-        } catch (Exception e) {
-            form.setFormInvalid(true);
-        }
+        Optional<List<QuakeEntry>> filteredQuakeEntries
+                    = webAdapter.filterByDistance(form.getLatitude(),
+                                                  form.getLongitude(),
+                                                  form.getDistance());
+        form.setFormInvalid(filteredQuakeEntries.isEmpty());
         filteredQuakeEntries.ifPresent(e -> log.info(e.toString()));
         return CLOSEST_TEMPLATE;
     }
 
     @GetMapping("/earthquake/magnitude")
-    public String getClosest(MagnitudeFilter form) {
+    public String getStrongest(MagnitudeFilter form) {
         form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());
         return MAGNITUDE_TEMPLATE;
     }
 
     @PostMapping("/earthquake/magnitude")
-    public String postClosest(MagnitudeFilter form) {
+    public String postStrongest(MagnitudeFilter form) {
         form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());
         log.info("form data received {}", form);
-        Optional<List<QuakeEntry>> filteredQuakeEntries = Optional.empty();
-        try {
-            Double.parseDouble(form.getMagnitude());
-            filteredQuakeEntries = webAdapter.filterByMagnitude(form.getMagnitude());
-        } catch (Exception e) {
-            form.setFormInvalid(true);
-        }
-
-        if (filteredQuakeEntries.isPresent()) {
-            //form.setFormInvalid(false);
-            filteredQuakeEntries.stream().forEach(e -> log.info(e.toString()));
-        }
+        Optional<List<QuakeEntry>> filteredQuakeEntries
+                = webAdapter.filterByMagnitude(form.getMagnitude());
+        form.setFormInvalid(filteredQuakeEntries.isEmpty());
+        filteredQuakeEntries.ifPresent(e -> log.info(e.toString()));
         return MAGNITUDE_TEMPLATE;
+    }
+
+    @GetMapping("/earthquake/depth")
+    public String getDepth(DepthFilter form) {
+        form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());
+        return DEPTH_TEMPLATE;
+    }
+
+    @PostMapping("/earthquake/depth")
+    public String postDepth(DepthFilter form) {
+        form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());
+        log.info("form data received {}", form);
+        Optional<List<QuakeEntry>> filteredQuakeEntries
+                = webAdapter.filterByDepth(form.getMinDepth(), form.getMaxDepth());
+        filteredQuakeEntries.ifPresent(e -> log.info(e.toString()));
+        return DEPTH_TEMPLATE;
     }
 }
