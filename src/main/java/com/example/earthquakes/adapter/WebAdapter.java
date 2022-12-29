@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.example.earthquakes.Constants.SOURCE_FILE_LOCATION;
+import static com.example.earthquakes.web.formdata.NameFilter.PhrasePosition;
 
 @Component
 @Slf4j
@@ -77,6 +78,16 @@ public class WebAdapter {
         try {
             return quakeEntries
                     .map(q -> earthQuakeClient.filterByMagnitude(q, Double.parseDouble(magMin)));
+        } catch (Exception e) {
+            return Optional.empty();
+        }
+    }
+
+    public Optional<List<QuakeEntry>> filterByPhrase(String phrase,
+                                                   PhrasePosition position) {
+        try {
+            return quakeEntries
+                    .map(q -> earthQuakeClient.filterByPhrase(q, position, phrase));
         } catch (Exception e) {
             return Optional.empty();
         }

@@ -2,10 +2,7 @@ package com.example.earthquakes.web;
 
 import com.example.earthquakes.adapter.WebAdapter;
 import com.example.earthquakes.entities.QuakeEntry;
-import com.example.earthquakes.web.formdata.DepthFilter;
-import com.example.earthquakes.web.formdata.DistanceFilter;
-import com.example.earthquakes.web.formdata.Entries;
-import com.example.earthquakes.web.formdata.MagnitudeFilter;
+import com.example.earthquakes.web.formdata.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -95,5 +92,21 @@ public class EarthQuakeController {
                 = webAdapter.filterByDepth(form.getMinDepth(), form.getMaxDepth());
         filteredQuakeEntries.ifPresent(e -> log.info(e.toString()));
         return DEPTH_TEMPLATE;
+    }
+
+    @GetMapping("/earthquake/name")
+    public String getDepth(NameFilter form) {
+        form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());
+        return NAME_TEMPLATE;
+    }
+
+    @PostMapping("/earthquake/name")
+    public String postDepth(NameFilter form) {
+        form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());
+        log.info("form data received {}", form);
+        Optional<List<QuakeEntry>> filteredQuakeEntries
+                = webAdapter.filterByPhrase(form.getPhrase(), form.getPosition());
+        filteredQuakeEntries.ifPresent(e -> log.info(e.toString()));
+        return NAME_TEMPLATE;
     }
 }

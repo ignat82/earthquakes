@@ -8,4 +8,5 @@ public class Constants {
     public static final String CLOSEST_TEMPLATE = "closest";
     public static final String MAGNITUDE_TEMPLATE = "magnitude";
     public static final String DEPTH_TEMPLATE = "depth";
+    public static final String NAME_TEMPLATE = "name";
 }

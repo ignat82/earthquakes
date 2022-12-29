@@ -7,10 +7,35 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import static com.example.earthquakes.web.formdata.NameFilter.PhrasePosition;
+
 @Component
 public class EarthQuakeClient {
     public EarthQuakeClient() {
         // TODO Auto-generated constructor stub
+    }
+
+    public ArrayList<QuakeEntry> filterByPhrase(ArrayList<QuakeEntry> quakeData,
+                                                PhrasePosition position,
+                                                String phrase) {
+        switch (position) {
+            case ANY -> {
+                return quakeData.stream()
+                                .filter(q -> q.getInfo().contains(phrase))
+                                .collect(Collectors.toCollection(ArrayList::new));
+            }
+            case END -> {
+                return quakeData.stream()
+                                .filter(q -> q.getInfo().endsWith(phrase))
+                                .collect(Collectors.toCollection(ArrayList::new));
+            }
+            case START -> {
+                return quakeData.stream()
+                                .filter(q -> q.getInfo().startsWith(phrase))
+                                .collect(Collectors.toCollection(ArrayList::new));
+            }
+        }
+        return quakeData;
     }
 
     public ArrayList<QuakeEntry> filterByMagnitude(ArrayList<QuakeEntry> quakeData,

@@ -15,8 +15,10 @@
 </form>
 <pre th:if="${entries.formInvalid}" th:style="'color:red;'">
     form data invalid or no entries found</pre>
-<a th:href="@{~/earthquake/closest}">distance</a><br>
-<a th:href="@{~/earthquake/magnitude}">magnitude</a><br>
 <a th:href="@{~/earthquake/depth}">depth</a><br>
+<a th:href="@{~/earthquake/closest}">distance</a><br>
+<a th:href="@{~/earthquake/name}">name</a><br>
+<a th:href="@{~/earthquake/magnitude}">magnitude</a><br>
+
 </body>
 </html>
