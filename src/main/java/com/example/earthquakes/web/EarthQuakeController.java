@@ -39,6 +39,10 @@ public class EarthQuakeController {
         form.setFormInvalid(parcedQuakeEntries.isEmpty());
         form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());
         webAdapter.getQuakeEntries().ifPresent(q -> q.forEach(e -> log.info(e.toString())));
+        form.setOutput(parcedQuakeEntries.orElseGet(ArrayList::new).stream()
+                                     .map(Object::toString)
+                                     .collect(Collectors.joining("\n")));
+        form.setNumber(parcedQuakeEntries.orElseGet(ArrayList::new).size());
         return EARTHQUAKE_TEMPLATE;
     }
 
@@ -71,7 +75,7 @@ public class EarthQuakeController {
         Optional<List<QuakeEntry>> filteredQuakeEntries
                 = webAdapter.filterByClosest(form.getLatitude(),
                                               form.getLongitude(),
-                                              form.getNumber());
+                                              form.getHowMany());
         populateForm(form, filteredQuakeEntries);
         return CLOSEST_TEMPLATE;
     }

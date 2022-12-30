@@ -10,5 +10,5 @@ import lombok.ToString;
 public class ClosestFilter extends AbstractForm {
     private String latitude;
     private String longitude;
-    private String number;
+    private String howMany;
 }

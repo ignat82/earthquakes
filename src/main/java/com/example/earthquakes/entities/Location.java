@@ -177,7 +177,7 @@ public class Location {
      * The coordinate must be a valid double between -180.0 and 180.0.
      *
      * @throws IllegalArgumentException if coordinate is less than
-     * -180.0, greater than 180.0, or is not a number.
+     * -180.0, greater than 180.0, or is not a howMany.
      * @throws IllegalArgumentException if outputType is not one of
      * FORMAT_DEGREES, FORMAT_MINUTES, or FORMAT_SECONDS.
      */
