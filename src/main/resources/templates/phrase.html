@@ -1,23 +1,23 @@
 <html>
-<head><title>Name</title></head>
+<head><title>Phrase</title></head>
 <body>
-<h3>Filter by name</h3>
-<pre th:if="${!nameFilter.entriesPresent}" th:style="'color:red;'">
+<h3>Filter by phrase</h3>
+<pre th:if="${!phraseFilter.entriesPresent}" th:style="'color:red;'">
     quake entries missing</pre>
-<form action="#" th:action="@{/earthquake/name}" th:object="${nameFilter}"
+<form action="#" th:action="@{/earthquake/phrase}" th:object="${phraseFilter}"
       method="post">
     <label>phrase<br>
         <input type="text" width="200" th:field="*{phrase}">
     </label><br><br>
     <label>position</label><br>
-        <div th:each="position : ${T(com.example.earthquakes.web.formdata.NameFilter.PhrasePosition).values()}">
+        <div th:each="position : ${T(com.example.earthquakes.web.formdata.PhraseFilter.PhrasePosition).values()}">
             <input type="radio" th:field="*{position}" th:value="${position}">
             <label th:text="${position.getString()}">position</label>
             <br>
         </div>
     <br><input type="submit" value="submit"/><input type="reset" value="Reset"/>
 </form>
-<pre th:if="${nameFilter.formInvalid}" th:style="'color:red;'">
+<pre th:if="${phraseFilter.formInvalid}" th:style="'color:red;'">
     form data invalid</pre>
 <a th:href="@{~/earthquake/entries}">entries</a><br><br>
 

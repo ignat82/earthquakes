@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.example.earthquakes.Constants.SOURCE_FILE_LOCATION;
-import static com.example.earthquakes.web.formdata.NameFilter.PhrasePosition;
+import static com.example.earthquakes.web.formdata.PhraseFilter.PhrasePosition;
 
 @Component
 @Slf4j

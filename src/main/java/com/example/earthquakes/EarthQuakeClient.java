@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-import static com.example.earthquakes.web.formdata.NameFilter.PhrasePosition;
+import static com.example.earthquakes.web.formdata.PhraseFilter.PhrasePosition;
 
 @Component
 public class EarthQuakeClient {

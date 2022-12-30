@@ -94,19 +94,19 @@ public class EarthQuakeController {
         return DEPTH_TEMPLATE;
     }
 
-    @GetMapping("/earthquake/name")
-    public String getDepth(NameFilter form) {
+    @GetMapping("/earthquake/phrase")
+    public String getDepth(PhraseFilter form) {
         form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());
-        return NAME_TEMPLATE;
+        return PHRASE_TEMPLATE;
     }
 
-    @PostMapping("/earthquake/name")
-    public String postDepth(NameFilter form) {
+    @PostMapping("/earthquake/phrase")
+    public String postDepth(PhraseFilter form) {
         form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());
         log.info("form data received {}", form);
         Optional<List<QuakeEntry>> filteredQuakeEntries
                 = webAdapter.filterByPhrase(form.getPhrase(), form.getPosition());
         filteredQuakeEntries.ifPresent(e -> log.info(e.toString()));
-        return NAME_TEMPLATE;
+        return PHRASE_TEMPLATE;
     }
 }

@@ -10,7 +10,7 @@ import java.util.Arrays;
 @Getter
 @Setter
 @ToString
-public class NameFilter extends AbstractForm {
+public class PhraseFilter extends AbstractForm {
     private String phrase;
     private PhrasePosition position;
 
@@ -23,11 +23,11 @@ public class NameFilter extends AbstractForm {
         private static final PhrasePosition[] ALL_VALUES = PhrasePosition.values();
         private final String string;
 
-        public static PhrasePosition fromString(String nameString) {
-            return (nameString == null)
+        public static PhrasePosition fromString(String phraseString) {
+            return (phraseString == null)
                     ? null
                     : Arrays.stream(PhrasePosition.ALL_VALUES)
-                         .filter(v -> v.getString().equals(nameString))
+                         .filter(v -> v.getString().equals(phraseString))
                          .findAny().orElse(PhrasePosition.ANY);
         }
     }
