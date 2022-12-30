@@ -80,6 +80,21 @@ public class EarthQuakeController {
         return CLOSEST_TEMPLATE;
     }
 
+    @GetMapping("/earthquake/largest")
+    public String getClosest(LargestFilter form) {
+        form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());
+        return LARGEST_TEMPLATE;
+    }
+
+    @PostMapping("/earthquake/largest")
+    public String postClosest(LargestFilter form) {
+        log.info("form data received {}", form);
+        Optional<List<QuakeEntry>> filteredQuakeEntries
+                = webAdapter.filterByLargest(form.getHowMany());
+        populateForm(form, filteredQuakeEntries);
+        return LARGEST_TEMPLATE;
+    }
+
     @GetMapping("/earthquake/magnitude")
     public String getStrongest(MagnitudeFilter form) {
         form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());

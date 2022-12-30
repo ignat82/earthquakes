@@ -1,0 +1,30 @@
+<html>
+<head><title>Largest</title></head>
+<body>
+<h3>Filter by largest</h3>
+<pre th:if="${!largestFilter.entriesPresent}" th:style="'color:red;'">
+    quake entries missing</pre>
+<form action="#" th:action="@{/earthquake/largest}" th:object="${largestFilter}"
+      method="post">
+    <label>how many<br>
+        <input type="text" width="200" th:field="*{howMany}">
+    </label><br>
+    <br><input type="submit" value="submit"/><input type="reset" value="Reset"/>
+</form>
+<pre th:if="${largestFilter.formInvalid}" th:style="'color:red;'">
+    form data invalid</pre>
+<a th:href="@{~/earthquake/entries}">entries</a><br><br>
+
+<a th:href="@{~/earthquake/largest}">largest</a><br>
+<a th:href="@{~/earthquake/depth}">depth</a><br>
+<a th:href="@{~/earthquake/distance}">distance</a><br>
+<a th:href="@{~/earthquake/magnitude}">magnitude</a><br>
+<a th:href="@{~/earthquake/phrase}">phrase</a><br>
+
+<pre th:text="${largestFilter.number}" th:style="'color:red;'">
+    number</pre>
+<pre th:text="${largestFilter.output}" th:style="'color:red;'">
+    outuput</pre>
+
+</body>
+</html>

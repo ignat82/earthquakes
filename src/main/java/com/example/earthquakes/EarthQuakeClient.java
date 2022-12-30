@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.stream.Collectors;
 
 import static com.example.earthquakes.web.formdata.PhraseFilter.PhrasePosition;
@@ -75,6 +76,22 @@ public class EarthQuakeClient {
             answer.add(nearestQuake);
             log.info("added with distance {}", nearestQuake.getLocation().distanceTo(from));
             quakeData.remove(nearestQuake);
+        }
+        return answer;
+    }
+
+    public ArrayList<QuakeEntry> filterByLargest(ArrayList<QuakeEntry> quakeData,
+                                                   long howMany) {
+        ArrayList<QuakeEntry> answer = new ArrayList<>();
+        if (quakeData.isEmpty()) {
+            return new ArrayList<>();
+        }
+        while (howMany-- > 0 && !quakeData.isEmpty()) {
+            QuakeEntry largestQuake = Collections.max(
+                    quakeData, Comparator.comparingDouble(QuakeEntry::getMagnitude));
+            answer.add(largestQuake);
+            log.info("added with magmituge {}", largestQuake.getMagnitude());
+            quakeData.remove(largestQuake);
         }
         return answer;
     }
