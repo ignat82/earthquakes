@@ -1,10 +1,10 @@
 <html>
-<head><title>Closest</title></head>
+<head><title>Distance</title></head>
 <body>
-<h3>Filter by closest</h3>
-<pre th:if="${!closestFilter.entriesPresent}" th:style="'color:red;'">
+<h3>Filter by distance</h3>
+<pre th:if="${!distanceFilter.entriesPresent}" th:style="'color:red;'">
     quake entries missing</pre>
-<form action="#" th:action="@{/earthquake/closest}" th:object="${closestFilter}"
+<form action="#" th:action="@{/earthquake/distance}" th:object="${distanceFilter}"
       method="post">
     <label>latitude<br>
         <input type="text" width="200" th:field="*{latitude}">
@@ -12,21 +12,21 @@
     <label>longitude<br>
         <input type="text" width="200" th:field="*{longitude}">
     </label><br>
-    <label>number<br>
-        <input type="text" width="200" th:field="*{number}">
+    <label>distance<br>
+        <input type="text" width="200" th:field="*{distance}">
     </label><br>
     <br><input type="submit" value="submit"/><input type="reset" value="Reset"/>
 </form>
-<pre th:if="${closestFilter.formInvalid}" th:style="'color:red;'">
+<pre th:if="${distanceFilter.formInvalid}" th:style="'color:red;'">
     form data invalid</pre>
 <a th:href="@{~/earthquake/entries}">entries</a><br><br>
 
+<a th:href="@{~/earthquake/closest}">closest</a><br>
 <a th:href="@{~/earthquake/depth}">depth</a><br>
-<a th:href="@{~/earthquake/distance}">distance</a><br>
 <a th:href="@{~/earthquake/magnitude}">magnitude</a><br>
 <a th:href="@{~/earthquake/phrase}">phrase</a><br>
 
-<pre th:text="${closestFilter.output}" th:style="'color:red;'">
+<pre th:text="${distanceFilter.output}" th:style="'color:red;'">
     outuput</pre>
 
 </body>

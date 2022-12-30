@@ -59,6 +59,21 @@ public class WebAdapter {
         }
     }
 
+    public Optional<List<QuakeEntry>> filterByClosest(String lattitude,
+                                                       String longituge,
+                                                       String number) {
+        try {
+            double lat = Double.parseDouble(lattitude);
+            double lon = Double.parseDouble(longituge);
+            long numb = Long.parseLong(number);
+            Location location = new Location(lat, lon);
+            return quakeEntries
+                    .map(q -> earthQuakeClient.filterByClosestTo(q, numb, location));
+        } catch (Exception e) {
+            return Optional.empty();
+        }
+    }
+
     public Optional<List<QuakeEntry>> filterByDistance(String lattitude,
                                                        String longituge,
                                                        String distance) {

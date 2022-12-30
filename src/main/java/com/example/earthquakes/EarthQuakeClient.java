@@ -2,14 +2,17 @@ package com.example.earthquakes;
 
 import com.example.earthquakes.entities.Location;
 import com.example.earthquakes.entities.QuakeEntry;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.stream.Collectors;
 
 import static com.example.earthquakes.web.formdata.PhraseFilter.PhrasePosition;
 
 @Component
+@Slf4j
 public class EarthQuakeClient {
     public EarthQuakeClient() {
         // TODO Auto-generated constructor stub
@@ -54,6 +57,26 @@ public class EarthQuakeClient {
                         .filter(q -> q.getDepth() > minDepth &&
                                 q.getDepth() < maxDepth)
                         .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public ArrayList<QuakeEntry> filterByClosestTo(ArrayList<QuakeEntry> quakeData,
+                                                      long howMany,
+                                                      Location from) {
+        ArrayList<QuakeEntry> answer = new ArrayList<QuakeEntry>();
+        if (quakeData.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        while (howMany-- > 0 && !quakeData.isEmpty()) {
+            QuakeEntry nearestQuake
+                    = Collections.min(quakeData, (q1, q2) -> Float.compare(
+                            q1.getLocation().distanceTo(from),
+                            q2.getLocation().distanceTo(from)));
+            answer.add(nearestQuake);
+            log.info("added with distance {}", nearestQuake.getLocation().distanceTo(from));
+            quakeData.remove(nearestQuake);
+        }
+        return answer;
     }
 
     public ArrayList<QuakeEntry> filterByDistanceFrom(ArrayList<QuakeEntry> quakeData,

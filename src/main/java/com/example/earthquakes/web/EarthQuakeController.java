@@ -42,19 +42,36 @@ public class EarthQuakeController {
         return EARTHQUAKE_TEMPLATE;
     }
 
-    @GetMapping("/earthquake/closest")
-    public String getClosest(DistanceFilter form) {
+    @GetMapping("/earthquake/distance")
+    public String getDistance(DistanceFilter form) {
         form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());
-        return CLOSEST_TEMPLATE;
+        return DISTANCE_TEMPLATE;
     }
 
-    @PostMapping("/earthquake/closest")
-    public String postClosest(DistanceFilter form) {
+    @PostMapping("/earthquake/distance")
+    public String postDistance(DistanceFilter form) {
         log.info("form data received {}", form);
         Optional<List<QuakeEntry>> filteredQuakeEntries
                     = webAdapter.filterByDistance(form.getLatitude(),
                                                   form.getLongitude(),
                                                   form.getDistance());
+        populateForm(form, filteredQuakeEntries);
+        return DISTANCE_TEMPLATE;
+    }
+
+    @GetMapping("/earthquake/closest")
+    public String getClosest(ClosestFilter form) {
+        form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());
+        return CLOSEST_TEMPLATE;
+    }
+
+    @PostMapping("/earthquake/closest")
+    public String postClosest(ClosestFilter form) {
+        log.info("form data received {}", form);
+        Optional<List<QuakeEntry>> filteredQuakeEntries
+                = webAdapter.filterByClosest(form.getLatitude(),
+                                              form.getLongitude(),
+                                              form.getNumber());
         populateForm(form, filteredQuakeEntries);
         return CLOSEST_TEMPLATE;
     }
@@ -113,6 +130,7 @@ public class EarthQuakeController {
         form.setOutput(filteredQuakes.orElseGet(ArrayList::new).stream()
                                            .map(Object::toString)
                                            .collect(Collectors.joining("\n")));
+        form.setNumber(filteredQuakes.orElseGet(ArrayList::new).size());
         log.info("form output is {}", form.getOutput());
     }
 }

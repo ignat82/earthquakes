@@ -18,10 +18,12 @@
     form data invalid</pre>
 <a th:href="@{~/earthquake/entries}">entries</a><br><br>
 
-<a th:href="@{~/earthquake/closest}">distance</a><br>
+<a th:href="@{~/earthquake/closest}">closest</a><br>
+<a th:href="@{~/earthquake/distance}">distance</a><br>
 <a th:href="@{~/earthquake/magnitude}">magnitude</a><br>
 <a th:href="@{~/earthquake/phrase}">phrase</a><br>
-
+<pre th:text="${depthFilter.number}" th:style="'color:red;'">
+    number</pre>
 <pre th:text="${depthFilter.output}" th:style="'color:red;'">
     outuput</pre>
 
