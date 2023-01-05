@@ -1,13 +1,10 @@
-package com.example.earthquakes.adapter;
+package com.example.earthquakes.web;
 
 import com.example.earthquakes.EarthQuakeClient;
 import com.example.earthquakes.EarthQuakeParser;
 import com.example.earthquakes.entities.Location;
 import com.example.earthquakes.entities.QuakeEntry;
-import com.example.earthquakes.filter.DepthFilter;
-import com.example.earthquakes.filter.MaxDistanceFilter;
-import com.example.earthquakes.filter.MinMagFilter;
-import com.example.earthquakes.filter.PhraseFilter;
+import com.example.earthquakes.filter.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -20,8 +17,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.example.earthquakes.Constants.SOURCE_FILE_LOCATION;
-import static com.example.earthquakes.web.formdata.Phrase.PhrasePosition;
+import static com.example.earthquakes.entities.Constants.SOURCE_FILE_LOCATION;
+import static com.example.earthquakes.web.formdata.PhraseForm.PhrasePosition;
 
 @Component
 @Slf4j
@@ -77,10 +74,20 @@ public class WebAdapter {
         }
     }
 
-    public Optional<List<QuakeEntry>> filterByMagnitude(String magMin) {
+    public Optional<List<QuakeEntry>> filterByMinMagnitude(String magMin) {
         try {
             MinMagFilter minMagFilter = new MinMagFilter(Double.parseDouble(magMin));
             return earthQuakeClient.getFilteredEntries(quakeEntries, minMagFilter);
+        } catch (Exception e) {
+            return Optional.empty();
+        }
+    }
+
+    public Optional<List<QuakeEntry>> filterByMagnitude(String magMin, String magMax) {
+        try {
+            MagFilter magFilter = new MagFilter(Double.parseDouble(magMin),
+                                              Double.parseDouble(magMax));
+            return earthQuakeClient.getFilteredEntries(quakeEntries, magFilter);
         } catch (Exception e) {
             return Optional.empty();
         }

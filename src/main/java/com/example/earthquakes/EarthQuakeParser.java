@@ -71,7 +71,7 @@ public class EarthQuakeParser {
                         String mags = s2.substring(2,s2.indexOf(" ",2));
                         if (mags.contains("?")) {
                             mag = 0.0;
-                            System.err.println("unknown magnitude in data");
+                            System.err.println("unknown minMag in data");
                         }
                         else {
                             mag = Double.parseDouble(mags);

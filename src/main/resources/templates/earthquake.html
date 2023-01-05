@@ -11,21 +11,22 @@
     <label> patch to the source file<br>
         <input type="text" width="200" th:field="*{source}">
     </label><br>
-    <br><input type="submit" value="submit"/><input type="reset" value="Reset"/>
+    <br><input type="submit" value="Submit"/><input type="reset" value="Reset"/>
 </form>
 <pre th:if="${entries.formInvalid}" th:style="'color:red;'">
     form data invalid or no entries found</pre>
 <a th:href="@{~/earthquake/closest}">closest</a><br>
 <a th:href="@{~/earthquake/depth}">depth</a><br>
-<a th:href="@{~/earthquake/distance}">distance</a><br>
+<a th:href="@{~/earthquake/max_distance}">distance</a><br>
 <a th:href="@{~/earthquake/largest}">largest</a><br>
 <a th:href="@{~/earthquake/phrase}">phrase</a><br>
 <a th:href="@{~/earthquake/magnitude}">magnitude</a><br>
+<a th:href="@{~/earthquake/min_mag}">min_mag</a><br>
 
 <pre th:text="${entries.number}" th:style="'color:red;'">
     number</pre>
 <pre th:text="${entries.output}" th:style="'color:red;'">
-    outuput</pre>
+    output</pre>
 
 </body>
 </html>

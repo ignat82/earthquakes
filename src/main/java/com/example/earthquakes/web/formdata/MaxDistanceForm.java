@@ -7,6 +7,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class MagnitudeForm extends AbstractForm{
-    private String magnitude;
+public class MaxDistanceForm extends AbstractForm {
+    private String latitude;
+    private String longitude;
+    private String maxDistance;
 }

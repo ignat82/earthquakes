@@ -7,8 +7,6 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Closest extends AbstractForm {
-    private String latitude;
-    private String longitude;
-    private String howMany;
+public class MinMagForm extends AbstractForm{
+    private String minMag;
 }

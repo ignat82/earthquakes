@@ -392,12 +392,12 @@ public class Location {
     }
 
     /**
-     * Computes the approximate distance in meters between two
+     * Computes the approximate maxDistance in meters between two
      * locations, and optionally the initial and final bearings of the
-     * shortest path between them.  DistanceForm and bearing are defined using the
+     * shortest path between them.  MaxDistanceForm and bearing are defined using the
      * WGS84 ellipsoid.
      *
-     * <p> The computed distance is stored in results[0].  If results has length
+     * <p> The computed maxDistance is stored in results[0].  If results has length
      * 2 or greater, the initial bearing is stored in results[1]. If results has
      * length 3 or greater, the final bearing is stored in results[2].
      *
@@ -419,12 +419,12 @@ public class Location {
     }
 
     /**
-     * Returns the approximate distance in meters between this
-     * location and the given location.  DistanceForm is defined using
+     * Returns the approximate maxDistance in meters between this
+     * location and the given location.  MaxDistanceForm is defined using
      * the WGS84 ellipsoid.
      *
      * @param dest the destination location
-     * @return the approximate distance in meters
+     * @return the approximate maxDistance in meters
      */
     public float distanceTo(Location dest) {
         // See if we already have the result

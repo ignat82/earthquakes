@@ -34,7 +34,7 @@ public class EarthQuakeClient {
                             q1.getLocation().distanceTo(from),
                             q2.getLocation().distanceTo(from)));
             answer.add(nearestQuake);
-            log.info("added with distance {}", nearestQuake.getLocation().distanceTo(from));
+            log.info("added with maxDistance {}", nearestQuake.getLocation().distanceTo(from));
             quakeData.remove(nearestQuake);
         }
         return answer;
@@ -57,7 +57,7 @@ public class EarthQuakeClient {
     }
 
     public void dumpCSV(ArrayList<QuakeEntry> list){
-        System.out.println("Latitude,Longitude,MagnitudeForm,Info");
+        System.out.println("Latitude,Longitude,MinMagForm,Info");
         for(QuakeEntry qe : list){
             System.out.printf("%4.2f,%4.2f,%4.2f,%s\n",
                 qe.getLocation().getLatitude(),

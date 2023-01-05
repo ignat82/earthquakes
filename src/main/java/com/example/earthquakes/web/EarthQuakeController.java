@@ -1,6 +1,5 @@
 package com.example.earthquakes.web;
 
-import com.example.earthquakes.adapter.WebAdapter;
 import com.example.earthquakes.entities.QuakeEntry;
 import com.example.earthquakes.web.formdata.*;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.example.earthquakes.Constants.*;
+import static com.example.earthquakes.entities.Constants.*;
 
 @Slf4j
 @Controller
@@ -46,31 +45,31 @@ public class EarthQuakeController {
         return EARTHQUAKE_TEMPLATE;
     }
 
-    @GetMapping("/earthquake/distance")
-    public String getDistance(DistanceForm form) {
+    @GetMapping("/earthquake/max_distance")
+    public String getDistance(MaxDistanceForm form) {
         form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());
-        return DISTANCE_TEMPLATE;
+        return MAX_DISTANCE_TEMPLATE;
     }
 
-    @PostMapping("/earthquake/distance")
-    public String postDistance(DistanceForm form) {
+    @PostMapping("/earthquake/max_distance")
+    public String postDistance(MaxDistanceForm form) {
         log.info("form data received {}", form);
         Optional<List<QuakeEntry>> filteredQuakeEntries
                     = webAdapter.filterByDistance(form.getLatitude(),
                                                   form.getLongitude(),
-                                                  form.getDistance());
+                                                  form.getMaxDistance());
         populateForm(form, filteredQuakeEntries);
-        return DISTANCE_TEMPLATE;
+        return MAX_DISTANCE_TEMPLATE;
     }
 
     @GetMapping("/earthquake/closest")
-    public String getClosest(Closest form) {
+    public String getClosest(ClosestForm form) {
         form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());
         return CLOSEST_TEMPLATE;
     }
 
     @PostMapping("/earthquake/closest")
-    public String postClosest(Closest form) {
+    public String postClosest(ClosestForm form) {
         log.info("form data received {}", form);
         Optional<List<QuakeEntry>> filteredQuakeEntries
                 = webAdapter.filterByClosest(form.getLatitude(),
@@ -81,13 +80,13 @@ public class EarthQuakeController {
     }
 
     @GetMapping("/earthquake/largest")
-    public String getClosest(Largest form) {
+    public String getClosest(LargestForm form) {
         form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());
         return LARGEST_TEMPLATE;
     }
 
     @PostMapping("/earthquake/largest")
-    public String postClosest(Largest form) {
+    public String postClosest(LargestForm form) {
         log.info("form data received {}", form);
         Optional<List<QuakeEntry>> filteredQuakeEntries
                 = webAdapter.filterByLargest(form.getHowMany());
@@ -95,17 +94,32 @@ public class EarthQuakeController {
         return LARGEST_TEMPLATE;
     }
 
+    @GetMapping("/earthquake/min_mag")
+    public String getStrongest(MinMagForm form) {
+        form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());
+        return MIN_MAG_TEMPLATE;
+    }
+
+    @PostMapping("/earthquake/min_mag")
+    public String postStrongest(MinMagForm form) {
+        log.info("form data received {}", form);
+        Optional<List<QuakeEntry>> filteredQuakeEntries
+                = webAdapter.filterByMinMagnitude(form.getMinMag());
+        populateForm(form, filteredQuakeEntries);
+        return MIN_MAG_TEMPLATE;
+    }
+
     @GetMapping("/earthquake/magnitude")
-    public String getStrongest(MagnitudeForm form) {
+    public String getWithMagnitude(MagForm form) {
         form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());
         return MAGNITUDE_TEMPLATE;
     }
 
     @PostMapping("/earthquake/magnitude")
-    public String postStrongest(MagnitudeForm form) {
+    public String postWithMagnitude(MagForm form) {
         log.info("form data received {}", form);
         Optional<List<QuakeEntry>> filteredQuakeEntries
-                = webAdapter.filterByMagnitude(form.getMagnitude());
+                = webAdapter.filterByMagnitude(form.getMinMag(), form.getMaxMag());
         populateForm(form, filteredQuakeEntries);
         return MAGNITUDE_TEMPLATE;
     }
@@ -123,13 +137,13 @@ public class EarthQuakeController {
     }
 
     @GetMapping("/earthquake/phrase")
-    public String getPhrase(Phrase form) {
+    public String getPhrase(PhraseForm form) {
         form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());
         return PHRASE_TEMPLATE;
     }
 
     @PostMapping("/earthquake/phrase")
-    public String postPhrase(Phrase form) {
+    public String postPhrase(PhraseForm form) {
         log.info("form data received {}", form);
         Optional<List<QuakeEntry>> filteredQuakeEntries
                 = webAdapter.filterByPhrase(form.getPhrase(), form.getPosition());

@@ -1,7 +1,7 @@
 package com.example.earthquakes.filter;
 
 import com.example.earthquakes.entities.QuakeEntry;
-import com.example.earthquakes.web.formdata.Phrase.PhrasePosition;
+import com.example.earthquakes.web.formdata.PhraseForm.PhrasePosition;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

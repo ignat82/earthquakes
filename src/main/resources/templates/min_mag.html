@@ -1,0 +1,24 @@
+<html>
+<head><title>minMag</title></head>
+<body>
+<h3>Filter by minimum magnitude</h3>
+<pre th:if="${!minMagForm.entriesPresent}" th:style="'color:red;'">
+    quake entries missing</pre>
+<form action="#" th:action="@{/earthquake/min_mag}" th:object="${minMagForm}"
+      method="post">
+    <label>minmag to Form by<br>
+        <input type="text" width="200" th:field="*{minMag}">
+    </label><br>
+    <br><input type="submit" value="Submit"/><input type="reset" value="Reset"/>
+</form>
+<pre th:if="${minMagForm.formInvalid}" th:style="'color:red;'">
+    form data invalid or no entries found</pre>
+<a th:href="@{~/earthquake/entries}">entries</a><br><br>
+
+<pre th:text="${minMagForm.number}" th:style="'color:red;'">
+    number</pre>
+<pre th:text="${minMagForm.output}" th:style="'color:red;'">
+    output</pre>
+
+</body>
+</html>
