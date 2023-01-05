@@ -1,6 +1,7 @@
-package com.example.earthquakes.web;
+package com.example.earthquakes.web.controller;
 
 import com.example.earthquakes.entities.QuakeEntry;
+import com.example.earthquakes.web.WebAdapter;
 import com.example.earthquakes.web.formdata.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -142,17 +143,17 @@ public class EarthQuakeController {
         return MAGNITUDE_TEMPLATE;
     }
 
-    @GetMapping("/earthquake/depth")
-    public String getDepth(DepthForm form) {
-        form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());
-        return DEPTH_TEMPLATE;
-    }
-
-    @PostMapping("/earthquake/depth")
-    public String postDepth(DepthForm form) {
-        populateForm(form, webAdapter.filterByDepth(form.getMinDepth(), form.getMaxDepth()));
-        return DEPTH_TEMPLATE;
-    }
+//    @GetMapping("/earthquake/depth")
+//    public String getDepth(DepthForm form) {
+//        form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());
+//        return DEPTH_TEMPLATE;
+//    }
+//
+//    @PostMapping("/earthquake/depth")
+//    public String postDepth(DepthForm form) {
+//        populateForm(form, webAdapter.filterByDepth(form.getMinDepth(), form.getMaxDepth()));
+//        return DEPTH_TEMPLATE;
+//    }
 
     @GetMapping("/earthquake/phrase")
     public String getPhrase(PhraseForm form) {
