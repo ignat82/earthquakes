@@ -1,7 +1,7 @@
 package com.example.earthquakes.web.controller;
 
 import com.example.earthquakes.web.WebAdapter;
-import com.example.earthquakes.web.formdata.DepthForm;
+import com.example.earthquakes.web.formdata.MinMagForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,20 +9,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import static com.example.earthquakes.entities.Constants.*;
 
 @Controller
-public class DepthController extends AbstractController {
-    private final String PATH = DEPTH_PATH;
+public class MinMagController extends AbstractController {
+    private final String PATH = MIN_MAG_PATH;
 
-    public DepthController(WebAdapter webAdapter) {
-        super(webAdapter, DEPTH_TEMPLATE);
+    public MinMagController(WebAdapter webAdapter) {
+        super(webAdapter, MIN_MAG_TEMPLATE);
     }
 
     @GetMapping(PATH)
-    public String doGet(DepthForm form) {
+    public String doGet(MinMagForm form) {
         return super.doGet(form);
     }
 
     @PostMapping(PATH)
-    public String doPost(DepthForm form) {
-        return super.doPost(form, webAdapter.filterByDepth(form.getMinDepth(), form.getMaxDepth()));
+    public String doPost(MinMagForm form) {
+        return super.doPost(form, webAdapter.filterByMinMagnitude(form.getMinMag()));
     }
 }
