@@ -46,41 +46,6 @@ public class EarthQuakeController {
         return EARTHQUAKE_TEMPLATE;
     }
 
-    @GetMapping("/earthquake/distance")
-    public String getDistance(DistanceForm form) {
-        form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());
-        return DISTANCE_TEMPLATE;
-    }
-
-    @PostMapping("/earthquake/distance")
-    public String postDistance(DistanceForm form) {
-        log.info("form data received {}", form);
-        Optional<List<QuakeEntry>> filteredQuakeEntries
-                = webAdapter.filterByDistance(form.getLatitude(),
-                                              form.getLongitude(),
-                                              form.getMinDistance(),
-                                              form.getMaxDistance());
-        populateForm(form, filteredQuakeEntries);
-        return DISTANCE_TEMPLATE;
-    }
-
-    @GetMapping("/earthquake/closest")
-    public String getClosest(ClosestForm form) {
-        form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());
-        return CLOSEST_TEMPLATE;
-    }
-
-    @PostMapping("/earthquake/closest")
-    public String postClosest(ClosestForm form) {
-        log.info("form data received {}", form);
-        Optional<List<QuakeEntry>> filteredQuakeEntries
-                = webAdapter.filterByClosest(form.getLatitude(),
-                                              form.getLongitude(),
-                                              form.getHowMany());
-        populateForm(form, filteredQuakeEntries);
-        return CLOSEST_TEMPLATE;
-    }
-
     @GetMapping("/earthquake/largest")
     public String getClosest(LargestForm form) {
         form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());
