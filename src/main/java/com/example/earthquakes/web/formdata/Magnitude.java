@@ -7,6 +7,6 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class MagnitudeFilter extends AbstractForm{
+public class Magnitude extends AbstractForm{
     private String magnitude;
 }

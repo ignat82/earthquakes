@@ -10,7 +10,7 @@ import java.util.Arrays;
 @Getter
 @Setter
 @ToString
-public class PhraseFilter extends AbstractForm {
+public class Phrase extends AbstractForm {
     private String phrase;
     private PhrasePosition position;
 

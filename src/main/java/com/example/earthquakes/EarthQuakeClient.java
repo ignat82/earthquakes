@@ -2,15 +2,15 @@ package com.example.earthquakes;
 
 import com.example.earthquakes.entities.Location;
 import com.example.earthquakes.entities.QuakeEntry;
+import com.example.earthquakes.filter.DepthFilter;
+import com.example.earthquakes.filter.Filter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.example.earthquakes.web.formdata.PhraseFilter.PhrasePosition;
+import static com.example.earthquakes.web.formdata.Phrase.PhrasePosition;
 
 @Component
 @Slf4j
@@ -50,14 +50,11 @@ public class EarthQuakeClient {
                         .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public ArrayList<QuakeEntry> filterByDepth(ArrayList<QuakeEntry> quakeData,
-                                               double minDepth,
-                                               double maxDepth) {
+    public Optional<List<QuakeEntry>> filterByDepth(Optional<ArrayList<QuakeEntry>> quakeData,
+                                                    double minDepth,
+                                                    double maxDepth) {
         // TODO
-        return quakeData.stream()
-                        .filter(q -> q.getDepth() > minDepth &&
-                                q.getDepth() < maxDepth)
-                        .collect(Collectors.toCollection(ArrayList::new));
+        return getFilteredEntries(quakeData, new DepthFilter(minDepth, maxDepth));
     }
 
     public ArrayList<QuakeEntry> filterByClosestTo(ArrayList<QuakeEntry> quakeData,
@@ -154,4 +151,11 @@ public class EarthQuakeClient {
         }
     }
 
+    private Optional<List<QuakeEntry>> getFilteredEntries(Optional<ArrayList<QuakeEntry>> quakeEntries,
+                                                          Filter filter) {
+        return quakeEntries.map(entries -> entries.stream()
+                                                  .filter(filter::satisfies)
+                                                  .collect(Collectors.toCollection(ArrayList::new)));
+    }
 }
+

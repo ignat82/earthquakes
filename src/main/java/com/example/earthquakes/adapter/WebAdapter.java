@@ -17,7 +17,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.example.earthquakes.Constants.SOURCE_FILE_LOCATION;
-import static com.example.earthquakes.web.formdata.PhraseFilter.PhrasePosition;
+import static com.example.earthquakes.web.formdata.Phrase.PhrasePosition;
 
 @Component
 @Slf4j
@@ -53,8 +53,7 @@ public class WebAdapter {
         try {
             double min = Double.parseDouble(minDepth);
             double max = Double.parseDouble(maxDepth);
-            return quakeEntries
-                    .map(q -> earthQuakeClient.filterByDepth(q, min, max));
+            return earthQuakeClient.filterByDepth(quakeEntries, min, max);
         } catch (Exception e) {
             return Optional.empty();
         }

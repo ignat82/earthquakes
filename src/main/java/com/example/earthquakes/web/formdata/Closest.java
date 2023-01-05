@@ -7,6 +7,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class LargestFilter extends AbstractForm{
+public class Closest extends AbstractForm {
+    private String latitude;
+    private String longitude;
     private String howMany;
 }

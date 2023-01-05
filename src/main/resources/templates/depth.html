@@ -1,10 +1,10 @@
 <html>
 <head><title>Depth</title></head>
 <body>
-<h3>Filter by depth</h3>
-<pre th:if="${!depthFilter.entriesPresent}" th:style="'color:red;'">
+<h3>Form by depth</h3>
+<pre th:if="${!depthForm.entriesPresent}" th:style="'color:red;'">
     quake entries missing</pre>
-<form action="#" th:action="@{/earthquake/depth}" th:object="${depthFilter}"
+<form action="#" th:action="@{/earthquake/depth}" th:object="${depthForm}"
       method="post">
     <label>min depth<br>
         <input type="text" width="200" th:field="*{minDepth}">
@@ -14,7 +14,7 @@
     </label><br>
     <br><input type="submit" value="submit"/><input type="reset" value="Reset"/>
 </form>
-<pre th:if="${depthFilter.formInvalid}" th:style="'color:red;'">
+<pre th:if="${depthForm.formInvalid}" th:style="'color:red;'">
     form data invalid</pre>
 <a th:href="@{~/earthquake/entries}">entries</a><br><br>
 
@@ -24,9 +24,9 @@
 <a th:href="@{~/earthquake/magnitude}">magnitude</a><br>
 <a th:href="@{~/earthquake/phrase}">phrase</a><br>
 
-<pre th:text="${depthFilter.number}" th:style="'color:red;'">
+<pre th:text="${depthForm.number}" th:style="'color:red;'">
     number</pre>
-<pre th:text="${depthFilter.output}" th:style="'color:red;'">
+<pre th:text="${depthForm.output}" th:style="'color:red;'">
     outuput</pre>
 
 </body>

@@ -10,7 +10,7 @@
         <input type="text" width="200" th:field="*{phrase}">
     </label><br><br>
     <label>position</label><br>
-        <div th:each="position : ${T(com.example.earthquakes.web.formdata.PhraseFilter.PhrasePosition).values()}">
+        <div th:each="position : ${T(com.example.earthquakes.web.formdata.Phrase.PhrasePosition).values()}">
             <input type="radio" th:field="*{position}" th:value="${position}">
             <label th:text="${position.getString()}">position</label>
             <br>
