@@ -5,7 +5,8 @@ import com.example.earthquakes.EarthQuakeParser;
 import com.example.earthquakes.entities.Location;
 import com.example.earthquakes.entities.QuakeEntry;
 import com.example.earthquakes.filter.DepthFilter;
-import com.example.earthquakes.filter.DistanceFilter;
+import com.example.earthquakes.filter.MaxDistanceFilter;
+import com.example.earthquakes.filter.MinMagFilter;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -63,13 +64,22 @@ public class WebAdapter {
 
     public Optional<List<QuakeEntry>> filterByDistance(String lattitude,
                                                        String longituge,
-                                                       String distance) {
+                                                       String maxDistance) {
         try {
             double lat = Double.parseDouble(lattitude);
             double lon = Double.parseDouble(longituge);
-            DistanceFilter filter = new DistanceFilter(new Location(lat, lon),
-                                                       Double.parseDouble(distance));
+            MaxDistanceFilter filter = new MaxDistanceFilter(new Location(lat, lon),
+                                                             Double.parseDouble(maxDistance));
             return earthQuakeClient.getFilteredEntries(quakeEntries, filter);
+        } catch (Exception e) {
+            return Optional.empty();
+        }
+    }
+
+    public Optional<List<QuakeEntry>> filterByMagnitude(String magMin) {
+        try {
+            MinMagFilter minMagFilter = new MinMagFilter(Double.parseDouble(magMin));
+            return earthQuakeClient.getFilteredEntries(quakeEntries, minMagFilter);
         } catch (Exception e) {
             return Optional.empty();
         }
@@ -102,14 +112,7 @@ public class WebAdapter {
 
 
 
-    public Optional<List<QuakeEntry>> filterByMagnitude(String magMin) {
-        try {
-            return quakeEntries
-                    .map(q -> earthQuakeClient.filterByMagnitude(q, Double.parseDouble(magMin)));
-        } catch (Exception e) {
-            return Optional.empty();
-        }
-    }
+
 
     public Optional<List<QuakeEntry>> filterByPhrase(String phrase,
                                                    PhrasePosition position) {

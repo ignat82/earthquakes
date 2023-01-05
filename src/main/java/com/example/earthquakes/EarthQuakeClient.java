@@ -41,14 +41,6 @@ public class EarthQuakeClient {
         return quakeData;
     }
 
-    public ArrayList<QuakeEntry> filterByMagnitude(ArrayList<QuakeEntry> quakeData,
-                                                   double magMin ) {
-        // TODO
-        return quakeData.stream()
-                        .filter(q -> q.getMagnitude() > magMin)
-                        .collect(Collectors.toCollection(ArrayList::new));
-    }
-
     public ArrayList<QuakeEntry> filterByClosestTo(ArrayList<QuakeEntry> quakeData,
                                                       long howMany,
                                                       Location from) {
@@ -86,7 +78,7 @@ public class EarthQuakeClient {
     }
 
     public void dumpCSV(ArrayList<QuakeEntry> list){
-        System.out.println("Latitude,Longitude,Magnitude,Info");
+        System.out.println("Latitude,Longitude,MagnitudeForm,Info");
         for(QuakeEntry qe : list){
             System.out.printf("%4.2f,%4.2f,%4.2f,%s\n",
                 qe.getLocation().getLatitude(),
@@ -94,15 +86,6 @@ public class EarthQuakeClient {
                 qe.getMagnitude(),
                 qe.getInfo());
         }
-
-    }
-
-    public void bigQuakes(double magMin) {
-        EarthQuakeParser parser = new EarthQuakeParser();
-        //String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
-        String source = "data/nov20quakedata.atom";
-        ArrayList<QuakeEntry> list  = filterByMagnitude(parser.read(source), magMin);
-        System.out.println("read data for "+list.size()+" quakes");
 
     }
 

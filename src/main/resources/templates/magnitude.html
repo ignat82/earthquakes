@@ -1,17 +1,17 @@
 <html>
 <head><title>Magnitude</title></head>
 <body>
-<h3>Filter by magnitude</h3>
-<pre th:if="${!magnitudeFilter.entriesPresent}" th:style="'color:red;'">
+<h3>Form by magnitude</h3>
+<pre th:if="${!magnitudeForm.entriesPresent}" th:style="'color:red;'">
     quake entries missing</pre>
-<form action="#" th:action="@{/earthquake/magnitude}" th:object="${magnitudeFilter}"
+<form action="#" th:action="@{/earthquake/magnitude}" th:object="${magnitudeForm}"
       method="post">
-    <label>magnitude to filter by<br>
+    <label>magnitude to Form by<br>
         <input type="text" width="200" th:field="*{magnitude}">
     </label><br>
-    <br><input type="submit" value="filter"/><input type="reset" value="Reset"/>
+    <br><input type="submit" value="Form"/><input type="reset" value="Reset"/>
 </form>
-<pre th:if="${magnitudeFilter.formInvalid}" th:style="'color:red;'">
+<pre th:if="${magnitudeForm.formInvalid}" th:style="'color:red;'">
     form data invalid or no entries found</pre>
 <a th:href="@{~/earthquake/entries}">entries</a><br><br>
 
@@ -21,9 +21,9 @@
 <a th:href="@{~/earthquake/largest}">largest</a><br>
 <a th:href="@{~/earthquake/phrase}">phrase</a><br>
 
-<pre th:text="${magnitudeFilter.number}" th:style="'color:red;'">
+<pre th:text="${magnitudeForm.number}" th:style="'color:red;'">
     number</pre>
-<pre th:text="${magnitudeFilter.output}" th:style="'color:red;'">
+<pre th:text="${magnitudeForm.output}" th:style="'color:red;'">
     outuput</pre>
 
 </body>

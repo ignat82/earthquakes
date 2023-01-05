@@ -96,13 +96,13 @@ public class EarthQuakeController {
     }
 
     @GetMapping("/earthquake/magnitude")
-    public String getStrongest(Magnitude form) {
+    public String getStrongest(MagnitudeForm form) {
         form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());
         return MAGNITUDE_TEMPLATE;
     }
 
     @PostMapping("/earthquake/magnitude")
-    public String postStrongest(Magnitude form) {
+    public String postStrongest(MagnitudeForm form) {
         log.info("form data received {}", form);
         Optional<List<QuakeEntry>> filteredQuakeEntries
                 = webAdapter.filterByMagnitude(form.getMagnitude());

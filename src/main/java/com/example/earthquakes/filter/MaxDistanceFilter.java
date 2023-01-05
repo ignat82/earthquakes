@@ -7,10 +7,10 @@ import lombok.Setter;
 
 @RequiredArgsConstructor
 @Setter
-public class DistanceFilter implements Filter {
+public class MaxDistanceFilter implements Filter {
     private final Location location;
-    private final double distance;
+    private final double maxDistance;
     public boolean satisfies(QuakeEntry qe) {
-        return qe.getLocation().distanceTo(location) < distance;
+        return qe.getLocation().distanceTo(location) < maxDistance;
     }
 }
