@@ -2,9 +2,9 @@
 <head><title>Distance</title></head>
 <body>
 <h3>Filter by distance</h3>
-<pre th:if="${!distanceFilter.entriesPresent}" th:style="'color:red;'">
+<pre th:if="${!distanceForm.entriesPresent}" th:style="'color:red;'">
     quake entries missing</pre>
-<form action="#" th:action="@{/earthquake/distance}" th:object="${distanceFilter}"
+<form action="#" th:action="@{/earthquake/distance}" th:object="${distanceForm}"
       method="post">
     <label>latitude<br>
         <input type="text" width="200" th:field="*{latitude}">
@@ -17,7 +17,7 @@
     </label><br>
     <br><input type="submit" value="submit"/><input type="reset" value="Reset"/>
 </form>
-<pre th:if="${distanceFilter.formInvalid}" th:style="'color:red;'">
+<pre th:if="${distanceForm.formInvalid}" th:style="'color:red;'">
     form data invalid</pre>
 <a th:href="@{~/earthquake/entries}">entries</a><br><br>
 
@@ -27,9 +27,9 @@
 <a th:href="@{~/earthquake/magnitude}">magnitude</a><br>
 <a th:href="@{~/earthquake/phrase}">phrase</a><br>
 
-<pre th:text="${distanceFilter.number}" th:style="'color:red;'">
+<pre th:text="${distanceForm.number}" th:style="'color:red;'">
     number</pre>
-<pre th:text="${distanceFilter.output}" th:style="'color:red;'">
+<pre th:text="${distanceForm.output}" th:style="'color:red;'">
     outuput</pre>
 
 </body>

@@ -47,13 +47,13 @@ public class EarthQuakeController {
     }
 
     @GetMapping("/earthquake/distance")
-    public String getDistance(Distance form) {
+    public String getDistance(DistanceForm form) {
         form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());
         return DISTANCE_TEMPLATE;
     }
 
     @PostMapping("/earthquake/distance")
-    public String postDistance(Distance form) {
+    public String postDistance(DistanceForm form) {
         log.info("form data received {}", form);
         Optional<List<QuakeEntry>> filteredQuakeEntries
                     = webAdapter.filterByDistance(form.getLatitude(),

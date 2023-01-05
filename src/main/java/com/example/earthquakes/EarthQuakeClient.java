@@ -2,7 +2,6 @@ package com.example.earthquakes;
 
 import com.example.earthquakes.entities.Location;
 import com.example.earthquakes.entities.QuakeEntry;
-import com.example.earthquakes.filter.DepthFilter;
 import com.example.earthquakes.filter.Filter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -50,13 +49,6 @@ public class EarthQuakeClient {
                         .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public Optional<List<QuakeEntry>> filterByDepth(Optional<ArrayList<QuakeEntry>> quakeData,
-                                                    double minDepth,
-                                                    double maxDepth) {
-        // TODO
-        return getFilteredEntries(quakeData, new DepthFilter(minDepth, maxDepth));
-    }
-
     public ArrayList<QuakeEntry> filterByClosestTo(ArrayList<QuakeEntry> quakeData,
                                                       long howMany,
                                                       Location from) {
@@ -91,16 +83,6 @@ public class EarthQuakeClient {
             quakeData.remove(largestQuake);
         }
         return answer;
-    }
-
-    public ArrayList<QuakeEntry> filterByDistanceFrom(ArrayList<QuakeEntry> quakeData,
-                                                      double distMax,
-                                                      Location from) {
-        // ArrayList<QuakeEntry> answer = new ArrayList<QuakeEntry>();
-        // TODO
-        return quakeData.stream()
-                        .filter(e -> e.getLocation().distanceTo(from) < distMax)
-                        .collect(Collectors.toCollection(ArrayList::new));
     }
 
     public void dumpCSV(ArrayList<QuakeEntry> list){
@@ -151,7 +133,7 @@ public class EarthQuakeClient {
         }
     }
 
-    private Optional<List<QuakeEntry>> getFilteredEntries(Optional<ArrayList<QuakeEntry>> quakeEntries,
+    public Optional<List<QuakeEntry>> getFilteredEntries(Optional<ArrayList<QuakeEntry>> quakeEntries,
                                                           Filter filter) {
         return quakeEntries.map(entries -> entries.stream()
                                                   .filter(filter::satisfies)

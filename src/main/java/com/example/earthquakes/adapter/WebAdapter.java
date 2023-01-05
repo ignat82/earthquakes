@@ -4,6 +4,8 @@ import com.example.earthquakes.EarthQuakeClient;
 import com.example.earthquakes.EarthQuakeParser;
 import com.example.earthquakes.entities.Location;
 import com.example.earthquakes.entities.QuakeEntry;
+import com.example.earthquakes.filter.DepthFilter;
+import com.example.earthquakes.filter.DistanceFilter;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -51,9 +53,23 @@ public class WebAdapter {
     public Optional<List<QuakeEntry>> filterByDepth(String minDepth,
                                                     String maxDepth) {
         try {
-            double min = Double.parseDouble(minDepth);
-            double max = Double.parseDouble(maxDepth);
-            return earthQuakeClient.filterByDepth(quakeEntries, min, max);
+            DepthFilter filter = new DepthFilter(Double.parseDouble(minDepth),
+                                                 Double.parseDouble(maxDepth));
+            return earthQuakeClient.getFilteredEntries(quakeEntries, filter);
+        } catch (Exception e) {
+            return Optional.empty();
+        }
+    }
+
+    public Optional<List<QuakeEntry>> filterByDistance(String lattitude,
+                                                       String longituge,
+                                                       String distance) {
+        try {
+            double lat = Double.parseDouble(lattitude);
+            double lon = Double.parseDouble(longituge);
+            DistanceFilter filter = new DistanceFilter(new Location(lat, lon),
+                                                       Double.parseDouble(distance));
+            return earthQuakeClient.getFilteredEntries(quakeEntries, filter);
         } catch (Exception e) {
             return Optional.empty();
         }
@@ -84,20 +100,7 @@ public class WebAdapter {
         }
     }
 
-    public Optional<List<QuakeEntry>> filterByDistance(String lattitude,
-                                                       String longituge,
-                                                       String distance) {
-        try {
-            double lat = Double.parseDouble(lattitude);
-            double lon = Double.parseDouble(longituge);
-            double dist = Double.parseDouble(distance);
-            Location location = new Location(lat, lon);
-            return quakeEntries
-                    .map(q -> earthQuakeClient.filterByDistanceFrom(q, dist, location));
-        } catch (Exception e) {
-            return Optional.empty();
-        }
-    }
+
 
     public Optional<List<QuakeEntry>> filterByMagnitude(String magMin) {
         try {

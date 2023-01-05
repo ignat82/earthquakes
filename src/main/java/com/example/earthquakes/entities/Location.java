@@ -394,7 +394,7 @@ public class Location {
     /**
      * Computes the approximate distance in meters between two
      * locations, and optionally the initial and final bearings of the
-     * shortest path between them.  Distance and bearing are defined using the
+     * shortest path between them.  DistanceForm and bearing are defined using the
      * WGS84 ellipsoid.
      *
      * <p> The computed distance is stored in results[0].  If results has length
@@ -420,7 +420,7 @@ public class Location {
 
     /**
      * Returns the approximate distance in meters between this
-     * location and the given location.  Distance is defined using
+     * location and the given location.  DistanceForm is defined using
      * the WGS84 ellipsoid.
      *
      * @param dest the destination location
