@@ -7,6 +7,7 @@ import com.example.earthquakes.entities.QuakeEntry;
 import com.example.earthquakes.filter.DepthFilter;
 import com.example.earthquakes.filter.MaxDistanceFilter;
 import com.example.earthquakes.filter.MinMagFilter;
+import com.example.earthquakes.filter.PhraseFilter;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -85,6 +86,16 @@ public class WebAdapter {
         }
     }
 
+    public Optional<List<QuakeEntry>> filterByPhrase(String phrase,
+                                                     PhrasePosition position) {
+        try {
+            PhraseFilter phraseFilter = new PhraseFilter(position, phrase);
+            return earthQuakeClient.getFilteredEntries(quakeEntries, phraseFilter);
+        } catch (Exception e) {
+            return Optional.empty();
+        }
+    }
+
     public Optional<List<QuakeEntry>> filterByClosest(String lattitude,
                                                        String longituge,
                                                        String number) {
@@ -105,20 +116,6 @@ public class WebAdapter {
             long numb = Long.parseLong(number);
             return deepCopy(quakeEntries)
                     .map(q -> earthQuakeClient.filterByLargest(q, numb));
-        } catch (Exception e) {
-            return Optional.empty();
-        }
-    }
-
-
-
-
-
-    public Optional<List<QuakeEntry>> filterByPhrase(String phrase,
-                                                   PhrasePosition position) {
-        try {
-            return quakeEntries
-                    .map(q -> earthQuakeClient.filterByPhrase(q, position, phrase));
         } catch (Exception e) {
             return Optional.empty();
         }

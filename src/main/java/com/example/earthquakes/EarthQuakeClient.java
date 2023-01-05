@@ -9,36 +9,15 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.example.earthquakes.web.formdata.Phrase.PhrasePosition;
-
 @Component
 @Slf4j
 public class EarthQuakeClient {
-    public EarthQuakeClient() {
-        // TODO Auto-generated constructor stub
-    }
 
-    public ArrayList<QuakeEntry> filterByPhrase(ArrayList<QuakeEntry> quakeData,
-                                                PhrasePosition position,
-                                                String phrase) {
-        switch (position) {
-            case ANY -> {
-                return quakeData.stream()
-                                .filter(q -> q.getInfo().contains(phrase))
-                                .collect(Collectors.toCollection(ArrayList::new));
-            }
-            case END -> {
-                return quakeData.stream()
-                                .filter(q -> q.getInfo().endsWith(phrase))
-                                .collect(Collectors.toCollection(ArrayList::new));
-            }
-            case START -> {
-                return quakeData.stream()
-                                .filter(q -> q.getInfo().startsWith(phrase))
-                                .collect(Collectors.toCollection(ArrayList::new));
-            }
-        }
-        return quakeData;
+    public Optional<List<QuakeEntry>> getFilteredEntries(Optional<ArrayList<QuakeEntry>> quakeEntries,
+                                                         Filter filter) {
+        return quakeEntries.map(entries -> entries.stream()
+                                                  .filter(filter::satisfies)
+                                                  .collect(Collectors.toCollection(ArrayList::new)));
     }
 
     public ArrayList<QuakeEntry> filterByClosestTo(ArrayList<QuakeEntry> quakeData,
@@ -86,7 +65,6 @@ public class EarthQuakeClient {
                 qe.getMagnitude(),
                 qe.getInfo());
         }
-
     }
 
     public void closeToMe(){
@@ -114,13 +92,6 @@ public class EarthQuakeClient {
         for (QuakeEntry qe : list) {
             System.out.println(qe);
         }
-    }
-
-    public Optional<List<QuakeEntry>> getFilteredEntries(Optional<ArrayList<QuakeEntry>> quakeEntries,
-                                                          Filter filter) {
-        return quakeEntries.map(entries -> entries.stream()
-                                                  .filter(filter::satisfies)
-                                                  .collect(Collectors.toCollection(ArrayList::new)));
     }
 }
 
