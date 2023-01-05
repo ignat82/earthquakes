@@ -46,23 +46,6 @@ public class EarthQuakeController {
         return EARTHQUAKE_TEMPLATE;
     }
 
-    @GetMapping("/earthquake/max_distance")
-    public String getDistance(MaxDistanceForm form) {
-        form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());
-        return MAX_DISTANCE_TEMPLATE;
-    }
-
-    @PostMapping("/earthquake/max_distance")
-    public String postDistance(MaxDistanceForm form) {
-        log.info("form data received {}", form);
-        Optional<List<QuakeEntry>> filteredQuakeEntries
-                    = webAdapter.filterByMaxDistance(form.getLatitude(),
-                                                  form.getLongitude(),
-                                                  form.getMaxDistance());
-        populateForm(form, filteredQuakeEntries);
-        return MAX_DISTANCE_TEMPLATE;
-    }
-
     @GetMapping("/earthquake/distance")
     public String getDistance(DistanceForm form) {
         form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());
@@ -142,18 +125,6 @@ public class EarthQuakeController {
         populateForm(form, filteredQuakeEntries);
         return MAGNITUDE_TEMPLATE;
     }
-
-//    @GetMapping("/earthquake/depth")
-//    public String getDepth(DepthForm form) {
-//        form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());
-//        return DEPTH_TEMPLATE;
-//    }
-//
-//    @PostMapping("/earthquake/depth")
-//    public String postDepth(DepthForm form) {
-//        populateForm(form, webAdapter.filterByDepth(form.getMinDepth(), form.getMaxDepth()));
-//        return DEPTH_TEMPLATE;
-//    }
 
     @GetMapping("/earthquake/phrase")
     public String getPhrase(PhraseForm form) {

@@ -21,8 +21,6 @@ public class DepthController extends AbstractController {
 
     @PostMapping("/earthquake/depth")
     public String doPost(DepthForm form) {
-        initializeFormForPost(form, webAdapter.filterByDepth(form.getMinDepth(), form.getMaxDepth()));
-        return DEPTH_TEMPLATE;
+        return super.doPost(form, webAdapter.filterByDepth(form.getMinDepth(), form.getMaxDepth()));
     }
-
 }

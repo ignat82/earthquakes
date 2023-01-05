@@ -22,7 +22,7 @@ public abstract class AbstractController {
         return template;
     }
 
-    void initializeFormForPost(AbstractForm form,
+    String doPost(AbstractForm form,
                               Optional<List<QuakeEntry>> filteredQuakes) {
         log.info("form data received {}", form);
         form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());
@@ -34,5 +34,6 @@ public abstract class AbstractController {
                                      .collect(Collectors.joining("\n")));
         form.setNumber(filteredQuakes.orElseGet(ArrayList::new).size());
         log.info("form output is {}", form.getOutput());
+        return template;
     }
 }
