@@ -1,0 +1,33 @@
+<html>
+<head><title>Distance</title></head>
+<body>
+<h3>Filter by distance</h3>
+<pre th:if="${!distanceForm.entriesPresent}" th:style="'color:red;'">
+    quake entries missing</pre>
+<form action="#" th:action="@{/earthquake/distance}" th:object="${distanceForm}"
+      method="post">
+    <label>latitude<br>
+        <input type="text" width="200" th:field="*{latitude}">
+    </label><br>
+    <label>longitude<br>
+        <input type="text" width="200" th:field="*{longitude}">
+    </label><br>
+    <label>min distance<br>
+        <input type="text" width="200" th:field="*{minDistance}">
+    </label><br>
+    <label>max distance<br>
+        <input type="text" width="200" th:field="*{maxDistance}">
+    </label><br>
+    <br><input type="submit" value="Submit"/><input type="reset" value="Reset"/>
+</form>
+<pre th:if="${distanceForm.formInvalid}" th:style="'color:red;'">
+    form data invalid</pre>
+<a th:href="@{~/earthquake/entries}">entries</a><br><br>
+
+<pre th:text="${distanceForm.number}" th:style="'color:red;'">
+    number</pre>
+<pre th:text="${distanceForm.output}" th:style="'color:red;'">
+    output</pre>
+
+</body>
+</html>

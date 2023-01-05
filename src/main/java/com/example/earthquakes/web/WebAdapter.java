@@ -60,13 +60,29 @@ public class WebAdapter {
         }
     }
 
-    public Optional<List<QuakeEntry>> filterByDistance(String lattitude,
-                                                       String longituge,
+    public Optional<List<QuakeEntry>> filterByMaxDistance(String latitude,
+                                                       String longitude,
                                                        String maxDistance) {
         try {
-            double lat = Double.parseDouble(lattitude);
-            double lon = Double.parseDouble(longituge);
+            double lat = Double.parseDouble(latitude);
+            double lon = Double.parseDouble(longitude);
             MaxDistanceFilter filter = new MaxDistanceFilter(new Location(lat, lon),
+                                                             Double.parseDouble(maxDistance));
+            return earthQuakeClient.getFilteredEntries(quakeEntries, filter);
+        } catch (Exception e) {
+            return Optional.empty();
+        }
+    }
+
+    public Optional<List<QuakeEntry>> filterByDistance(String latitude,
+                                                       String longitude,
+                                                       String minDistance,
+                                                       String maxDistance) {
+        try {
+            double lat = Double.parseDouble(latitude);
+            double lon = Double.parseDouble(longitude);
+            DistanceFilter filter = new DistanceFilter(new Location(lat, lon),
+                                                             Double.parseDouble(minDistance),
                                                              Double.parseDouble(maxDistance));
             return earthQuakeClient.getFilteredEntries(quakeEntries, filter);
         } catch (Exception e) {

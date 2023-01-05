@@ -6,6 +6,7 @@ public class Constants {
     public static final String EARTHQUAKE_TEMPLATE = "earthquake";
     //public static final String EARTHQUAKE_PATCH = "earthquake";
     public static final String MAX_DISTANCE_TEMPLATE = "max_distance";
+    public static final String DISTANCE_TEMPLATE = "distance";
     public static final String CLOSEST_TEMPLATE = "closest";
 
     public static final String LARGEST_TEMPLATE = "largest";

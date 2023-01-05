@@ -55,11 +55,29 @@ public class EarthQuakeController {
     public String postDistance(MaxDistanceForm form) {
         log.info("form data received {}", form);
         Optional<List<QuakeEntry>> filteredQuakeEntries
-                    = webAdapter.filterByDistance(form.getLatitude(),
+                    = webAdapter.filterByMaxDistance(form.getLatitude(),
                                                   form.getLongitude(),
                                                   form.getMaxDistance());
         populateForm(form, filteredQuakeEntries);
         return MAX_DISTANCE_TEMPLATE;
+    }
+
+    @GetMapping("/earthquake/distance")
+    public String getDistance(DistanceForm form) {
+        form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());
+        return DISTANCE_TEMPLATE;
+    }
+
+    @PostMapping("/earthquake/distance")
+    public String postDistance(DistanceForm form) {
+        log.info("form data received {}", form);
+        Optional<List<QuakeEntry>> filteredQuakeEntries
+                = webAdapter.filterByDistance(form.getLatitude(),
+                                              form.getLongitude(),
+                                              form.getMinDistance(),
+                                              form.getMaxDistance());
+        populateForm(form, filteredQuakeEntries);
+        return DISTANCE_TEMPLATE;
     }
 
     @GetMapping("/earthquake/closest")
