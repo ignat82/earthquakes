@@ -23,7 +23,7 @@ public abstract class AbstractController {
     }
 
     String doPost(AbstractForm form,
-                              Optional<List<QuakeEntry>> filteredQuakes) {
+                  Optional<List<QuakeEntry>> filteredQuakes) {
         log.info("form data received {}", form);
         form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());
         form.setFormInvalid(filteredQuakes.isEmpty());

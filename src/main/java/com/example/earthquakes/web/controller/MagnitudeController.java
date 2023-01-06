@@ -24,6 +24,7 @@ public class MagnitudeController extends AbstractController {
 
     @PostMapping(PATH)
     public String doPost(MagForm form) {
-        return super.doPost(form, webAdapter.filterByMinMagnitude(form.getMinMag()));
+        return super.doPost(form, webAdapter.filterByMagnitude(form.getMinMag(),
+                                                               form.getMaxMag()));
     }
 }
