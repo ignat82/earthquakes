@@ -1,6 +1,7 @@
 package com.example.earthquakes.web.controller;
 
-import com.example.earthquakes.web.WebAdapter;
+import com.example.earthquakes.EarthQuakeClient;
+import com.example.earthquakes.web.adapter.WebAdapter;
 import com.example.earthquakes.web.formdata.MaxDistanceForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,8 +13,8 @@ import static com.example.earthquakes.entities.Constants.*;
 public class MaxDistanceController extends AbstractController {
     private final String PATH = MAX_DISTANCE_PATH;
 
-    public MaxDistanceController(WebAdapter webAdapter) {
-        super(webAdapter,  MAX_DISTANCE_TEMPLATE);
+    public MaxDistanceController(WebAdapter webAdapter, EarthQuakeClient earthQuakeClient) {
+        super(webAdapter, earthQuakeClient, DEPTH_TEMPLATE);
     }
 
     @GetMapping(PATH)

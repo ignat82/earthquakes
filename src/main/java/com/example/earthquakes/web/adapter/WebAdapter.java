@@ -1,4 +1,4 @@
-package com.example.earthquakes.web;
+package com.example.earthquakes.web.adapter;
 
 import com.example.earthquakes.EarthQuakeClient;
 import com.example.earthquakes.EarthQuakeParser;
@@ -49,16 +49,14 @@ public class WebAdapter {
         }
     }
 
-    public Optional<List<QuakeEntry>> filterByDepth(String minDepth,
-                                                    String maxDepth) {
-        try {
-            DepthFilter filter = new DepthFilter(Double.parseDouble(minDepth),
-                                                 Double.parseDouble(maxDepth));
-            return earthQuakeClient.getFilteredEntries(quakeEntries, filter);
-        } catch (Exception e) {
-            return Optional.empty();
-        }
-    }
+//    public Optional<List<QuakeEntry>> filterByDepth(DepthForm form) {
+//        try {
+//            DepthFilter filter = new DepthFilter(form);
+//            return earthQuakeClient.getFilteredEntries(quakeEntries, filter);
+//        } catch (Exception e) {
+//            return Optional.empty();
+//        }
+//    }
 
     public Optional<List<QuakeEntry>> filterByMaxDistance(String latitude,
                                                        String longitude,

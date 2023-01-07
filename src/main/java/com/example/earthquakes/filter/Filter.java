@@ -8,7 +8,6 @@ import com.example.earthquakes.entities.QuakeEntry;
  * @author (your name)
  * @version (a version number or a date)
  */
-public interface Filter
-{
+public interface Filter {
     public  boolean satisfies(QuakeEntry qe);
 }

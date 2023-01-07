@@ -1,7 +1,8 @@
 package com.example.earthquakes.web.controller;
 
+import com.example.earthquakes.EarthQuakeClient;
 import com.example.earthquakes.entities.QuakeEntry;
-import com.example.earthquakes.web.WebAdapter;
+import com.example.earthquakes.web.adapter.WebAdapter;
 import com.example.earthquakes.web.formdata.Entries;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -12,16 +13,15 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.example.earthquakes.entities.Constants.EARTHQUAKE_PATH;
-import static com.example.earthquakes.entities.Constants.EARTHQUAKE_TEMPLATE;
+import static com.example.earthquakes.entities.Constants.*;
 
 @Slf4j
 @Controller
 public class EarthQuakeController extends AbstractController {
     private final String PATH = EARTHQUAKE_PATH;
 
-    public EarthQuakeController(WebAdapter webAdapter) {
-        super(webAdapter, EARTHQUAKE_TEMPLATE);
+    public EarthQuakeController(WebAdapter webAdapter, EarthQuakeClient earthQuakeClient) {
+        super(webAdapter, earthQuakeClient, DEPTH_TEMPLATE);
     }
 
     @GetMapping(PATH)

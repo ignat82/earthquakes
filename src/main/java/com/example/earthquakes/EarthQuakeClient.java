@@ -3,18 +3,37 @@ package com.example.earthquakes;
 import com.example.earthquakes.entities.Location;
 import com.example.earthquakes.entities.QuakeEntry;
 import com.example.earthquakes.filter.Filter;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.net.URL;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static com.example.earthquakes.entities.Constants.SOURCE_FILE_LOCATION;
 
 @Component
 @Slf4j
 public class EarthQuakeClient {
+    private final EarthQuakeParser earthQuakeParser;
+    @Getter
+    private Optional<ArrayList<QuakeEntry>> quakeEntries;
+    public EarthQuakeClient(EarthQuakeParser earthQuakeParser) {
+        this.earthQuakeParser = earthQuakeParser;
+        quakeEntries = getEntriesFromFile(SOURCE_FILE_LOCATION);
+    }
 
+    // remove after abstract adapter implementation
     public Optional<List<QuakeEntry>> getFilteredEntries(Optional<ArrayList<QuakeEntry>> quakeEntries,
                                                          Filter filter) {
+        return quakeEntries.map(entries -> entries.stream()
+                                                  .filter(filter::satisfies)
+                                                  .collect(Collectors.toCollection(ArrayList::new)));
+    }
+
+    public Optional<List<QuakeEntry>> getFilteredEntries(Filter filter) {
         return quakeEntries.map(entries -> entries.stream()
                                                   .filter(filter::satisfies)
                                                   .collect(Collectors.toCollection(ArrayList::new)));
@@ -54,6 +73,20 @@ public class EarthQuakeClient {
             quakeData.remove(largestQuake);
         }
         return answer;
+    }
+
+    public Optional<ArrayList<QuakeEntry>> getEntriesFromFile(String relativePath) {
+        try {
+            URL res = getClass().getClassLoader().getResource(relativePath);
+            String path = Paths.get(res.toURI()).toFile().getAbsolutePath();
+            log.info("got path {}", path);
+            ArrayList<QuakeEntry> quakeEntries = earthQuakeParser.read(path);
+            log.info("got entries");
+            return Optional.of(quakeEntries);
+        } catch (Exception e) {
+            log.error("failed to acquire absolute patch. exception is {}", e.toString());
+            return Optional.empty();
+        }
     }
 
     public void dumpCSV(ArrayList<QuakeEntry> list){
