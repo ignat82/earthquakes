@@ -25,6 +25,6 @@ public class MagnitudeController extends AbstractController {
     @PostMapping(PATH)
     public String doPost(MagnitudeForm form) {
         MagnitudeAdapter adapter = new MagnitudeAdapter(earthQuakeClient, form);
-        return super.doPost(form, adapter.filterBy());
+        return super.doPost(form, adapter.filterBy(form));
     }
 }

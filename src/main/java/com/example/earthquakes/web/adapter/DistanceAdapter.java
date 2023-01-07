@@ -3,6 +3,7 @@ package com.example.earthquakes.web.adapter;
 import com.example.earthquakes.EarthQuakeClient;
 import com.example.earthquakes.filter.DistanceFilter;
 import com.example.earthquakes.filter.Filter;
+import com.example.earthquakes.web.formdata.AbstractForm;
 import com.example.earthquakes.web.formdata.DistanceForm;
 
 public class DistanceAdapter extends AbstractAdapter {
@@ -13,7 +14,7 @@ public class DistanceAdapter extends AbstractAdapter {
     }
 
     @Override
-    public Filter initializeFilter() {
+    public Filter initializeFilter(AbstractForm form) {
         return new DistanceFilter((DistanceForm) form);
     }
 }

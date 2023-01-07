@@ -3,6 +3,7 @@ package com.example.earthquakes.web.adapter;
 import com.example.earthquakes.EarthQuakeClient;
 import com.example.earthquakes.filter.Filter;
 import com.example.earthquakes.filter.MaxDistanceFilter;
+import com.example.earthquakes.web.formdata.AbstractForm;
 import com.example.earthquakes.web.formdata.MaxDistanceForm;
 
 public class MaxDistanceAdapter extends AbstractAdapter {
@@ -13,7 +14,7 @@ public class MaxDistanceAdapter extends AbstractAdapter {
     }
 
     @Override
-    public Filter initializeFilter() {
+    public Filter initializeFilter(AbstractForm form) {
         return new MaxDistanceFilter((MaxDistanceForm) form);
     }
 }

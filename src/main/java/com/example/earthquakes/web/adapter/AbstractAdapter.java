@@ -17,16 +17,16 @@ public abstract class AbstractAdapter {
     final EarthQuakeClient earthQuakeClient;
     final AbstractForm form;
 
-    public Optional<List<QuakeEntry>> filterBy() {
+    public Optional<List<QuakeEntry>> filterBy(AbstractForm form) {
         try {
-            return earthQuakeClient.getFilteredEntries(initializeFilter());
+            return earthQuakeClient.getFilteredEntries(initializeFilter(form));
         } catch (Exception e) {
             log.error("caught exception while filtering entries {}", e.toString());
             return Optional.empty();
         }
     }
 
-    public Filter initializeFilter() {
+    public Filter initializeFilter(AbstractForm form) {
         return new EmptyFilter();
     }
 }

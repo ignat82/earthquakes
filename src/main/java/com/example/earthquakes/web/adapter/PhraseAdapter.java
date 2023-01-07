@@ -3,6 +3,7 @@ package com.example.earthquakes.web.adapter;
 import com.example.earthquakes.EarthQuakeClient;
 import com.example.earthquakes.filter.Filter;
 import com.example.earthquakes.filter.PhraseFilter;
+import com.example.earthquakes.web.formdata.AbstractForm;
 import com.example.earthquakes.web.formdata.PhraseForm;
 
 public class PhraseAdapter extends AbstractAdapter {
@@ -12,7 +13,7 @@ public class PhraseAdapter extends AbstractAdapter {
     }
 
     @Override
-    public Filter initializeFilter() {
+    public Filter initializeFilter(AbstractForm form) {
         return new PhraseFilter((PhraseForm) form);
     }
 }

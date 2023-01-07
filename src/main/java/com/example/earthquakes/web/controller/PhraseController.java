@@ -25,6 +25,6 @@ public class PhraseController extends AbstractController {
     @PostMapping(PATH)
     public String doPost(PhraseForm form) {
         PhraseAdapter adapter = new PhraseAdapter(earthQuakeClient, form);
-        return super.doPost(form, adapter.filterBy());
+        return super.doPost(form, adapter.filterBy(form));
     }
 }

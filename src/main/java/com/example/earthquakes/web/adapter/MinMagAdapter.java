@@ -3,6 +3,7 @@ package com.example.earthquakes.web.adapter;
 import com.example.earthquakes.EarthQuakeClient;
 import com.example.earthquakes.filter.Filter;
 import com.example.earthquakes.filter.MinMagFilter;
+import com.example.earthquakes.web.formdata.AbstractForm;
 import com.example.earthquakes.web.formdata.MinMagForm;
 
 public class MinMagAdapter extends AbstractAdapter {
@@ -12,7 +13,7 @@ public class MinMagAdapter extends AbstractAdapter {
     }
 
     @Override
-    public Filter initializeFilter() {
+    public Filter initializeFilter(AbstractForm form) {
         return new MinMagFilter((MinMagForm) form);
     }
 }

@@ -1,4 +1,4 @@
-package com.example.earthquakes.web.adapter;
+package com.example.earthquakes.web.adapter.irregular;
 
 import com.example.earthquakes.EarthQuakeClient;
 import com.example.earthquakes.entities.Location;

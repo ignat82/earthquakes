@@ -1,7 +1,7 @@
 package com.example.earthquakes.web.controller;
 
 import com.example.earthquakes.EarthQuakeClient;
-import com.example.earthquakes.web.adapter.LargestAdapter;
+import com.example.earthquakes.web.adapter.irregular.LargestAdapter;
 import com.example.earthquakes.web.formdata.LargestForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

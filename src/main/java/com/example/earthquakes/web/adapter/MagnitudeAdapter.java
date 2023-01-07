@@ -3,6 +3,7 @@ package com.example.earthquakes.web.adapter;
 import com.example.earthquakes.EarthQuakeClient;
 import com.example.earthquakes.filter.Filter;
 import com.example.earthquakes.filter.MagnitudeFilter;
+import com.example.earthquakes.web.formdata.AbstractForm;
 import com.example.earthquakes.web.formdata.MagnitudeForm;
 
 public class MagnitudeAdapter extends AbstractAdapter {
@@ -13,7 +14,7 @@ public class MagnitudeAdapter extends AbstractAdapter {
     }
 
     @Override
-    public Filter initializeFilter() {
+    public Filter initializeFilter(AbstractForm form) {
         return new MagnitudeFilter((MagnitudeForm) form);
     }
 }

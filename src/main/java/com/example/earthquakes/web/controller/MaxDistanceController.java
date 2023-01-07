@@ -25,6 +25,6 @@ public class MaxDistanceController extends AbstractController {
     @PostMapping(PATH)
     public String doPost(MaxDistanceForm form) {
         MaxDistanceAdapter adapter = new MaxDistanceAdapter(earthQuakeClient, form);
-        return super.doPost(form, adapter.filterBy());
+        return super.doPost(form, adapter.filterBy(form));
     }
 }

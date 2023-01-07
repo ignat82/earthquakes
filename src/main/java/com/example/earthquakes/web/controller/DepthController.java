@@ -25,6 +25,6 @@ public class DepthController extends AbstractController {
     @PostMapping(PATH)
     public String doPost(DepthForm form) {
         DepthAdapter adapter = new DepthAdapter(earthQuakeClient, form);
-        return super.doPost(form, adapter.filterBy());
+        return super.doPost(form, adapter.filterBy(form));
     }
 }

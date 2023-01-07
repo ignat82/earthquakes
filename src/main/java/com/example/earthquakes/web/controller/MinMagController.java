@@ -25,6 +25,6 @@ public class MinMagController extends AbstractController {
     @PostMapping(PATH)
     public String doPost(MinMagForm form) {
         MinMagAdapter adapter = new MinMagAdapter(earthQuakeClient, form);
-        return super.doPost(form, adapter.filterBy());
+        return super.doPost(form, adapter.filterBy(form));
     }
 }
