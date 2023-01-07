@@ -1,4 +1,4 @@
-package com.example.earthquakes.web.adapter;
+package com.example.earthquakes.web.adapter.single;
 
 import com.example.earthquakes.EarthQuakeClient;
 import com.example.earthquakes.filter.DepthFilter;
@@ -8,7 +8,7 @@ import com.example.earthquakes.web.formdata.DepthForm;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DepthAdapter extends AbstractAdapter {
+public class DepthAdapter extends AbstractSingleFilterAdapter {
 
     public DepthAdapter(EarthQuakeClient earthQuakeClient) {
         super(earthQuakeClient);

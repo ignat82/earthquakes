@@ -1,8 +1,8 @@
 package com.example.earthquakes.web.controller;
 
 import com.example.earthquakes.EarthQuakeClient;
-import com.example.earthquakes.web.adapter.MagnitudeAdapter;
-import com.example.earthquakes.web.adapter.MaxDistanceAdapter;
+import com.example.earthquakes.web.adapter.single.MagnitudeAdapter;
+import com.example.earthquakes.web.adapter.single.MaxDistanceAdapter;
 import com.example.earthquakes.web.formdata.MaxDistanceForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

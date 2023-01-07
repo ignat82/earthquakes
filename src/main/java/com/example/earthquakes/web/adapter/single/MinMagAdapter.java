@@ -1,4 +1,4 @@
-package com.example.earthquakes.web.adapter;
+package com.example.earthquakes.web.adapter.single;
 
 import com.example.earthquakes.EarthQuakeClient;
 import com.example.earthquakes.filter.Filter;
@@ -8,7 +8,7 @@ import com.example.earthquakes.web.formdata.MinMagForm;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MinMagAdapter extends AbstractAdapter {
+public class MinMagAdapter extends AbstractSingleFilterAdapter {
     public MinMagAdapter(EarthQuakeClient earthQuakeClient) {
         super(earthQuakeClient);
     }

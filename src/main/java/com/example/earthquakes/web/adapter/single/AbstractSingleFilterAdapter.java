@@ -1,4 +1,4 @@
-package com.example.earthquakes.web.adapter;
+package com.example.earthquakes.web.adapter.single;
 
 import com.example.earthquakes.EarthQuakeClient;
 import com.example.earthquakes.entities.QuakeEntry;
@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Slf4j
-public abstract class AbstractAdapter {
+public abstract class AbstractSingleFilterAdapter {
     protected final EarthQuakeClient earthQuakeClient;
 
     public Optional<List<QuakeEntry>> filterBy(AbstractForm form) {

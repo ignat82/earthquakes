@@ -1,7 +1,7 @@
 package com.example.earthquakes.web.controller;
 
 import com.example.earthquakes.EarthQuakeClient;
-import com.example.earthquakes.web.adapter.MinMagAdapter;
+import com.example.earthquakes.web.adapter.single.MinMagAdapter;
 import com.example.earthquakes.web.formdata.MinMagForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

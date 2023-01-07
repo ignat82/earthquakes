@@ -1,7 +1,7 @@
 package com.example.earthquakes.web.controller;
 
 import com.example.earthquakes.EarthQuakeClient;
-import com.example.earthquakes.web.adapter.DistanceAdapter;
+import com.example.earthquakes.web.adapter.single.DistanceAdapter;
 import com.example.earthquakes.web.formdata.DistanceForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

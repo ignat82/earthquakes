@@ -1,4 +1,4 @@
-package com.example.earthquakes.web.adapter;
+package com.example.earthquakes.web.adapter.single;
 
 import com.example.earthquakes.EarthQuakeClient;
 import com.example.earthquakes.filter.Filter;
@@ -8,7 +8,7 @@ import com.example.earthquakes.web.formdata.MaxDistanceForm;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MaxDistanceAdapter extends AbstractAdapter {
+public class MaxDistanceAdapter extends AbstractSingleFilterAdapter {
 
     public MaxDistanceAdapter(EarthQuakeClient earthQuakeClient) {
         super(earthQuakeClient);

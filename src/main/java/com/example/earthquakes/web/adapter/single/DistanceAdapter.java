@@ -1,4 +1,4 @@
-package com.example.earthquakes.web.adapter;
+package com.example.earthquakes.web.adapter.single;
 
 import com.example.earthquakes.EarthQuakeClient;
 import com.example.earthquakes.filter.DistanceFilter;
@@ -8,7 +8,7 @@ import com.example.earthquakes.web.formdata.DistanceForm;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DistanceAdapter extends AbstractAdapter {
+public class DistanceAdapter extends AbstractSingleFilterAdapter {
 
     public DistanceAdapter(EarthQuakeClient earthQuakeClient) {
         super(earthQuakeClient);

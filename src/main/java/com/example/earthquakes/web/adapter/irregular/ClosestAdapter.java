@@ -3,7 +3,7 @@ package com.example.earthquakes.web.adapter.irregular;
 import com.example.earthquakes.EarthQuakeClient;
 import com.example.earthquakes.entities.Location;
 import com.example.earthquakes.entities.QuakeEntry;
-import com.example.earthquakes.web.adapter.AbstractAdapter;
+import com.example.earthquakes.web.adapter.single.AbstractSingleFilterAdapter;
 import com.example.earthquakes.web.formdata.AbstractForm;
 import com.example.earthquakes.web.formdata.ClosestForm;
 import org.springframework.stereotype.Component;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class ClosestAdapter extends AbstractAdapter {
+public class ClosestAdapter extends AbstractSingleFilterAdapter {
 
     public ClosestAdapter(EarthQuakeClient earthQuakeClient) {
         super(earthQuakeClient);
