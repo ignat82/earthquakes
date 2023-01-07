@@ -27,14 +27,6 @@ public class EarthQuakeClient {
         quakeEntries = getEntriesFromFile(SOURCE_FILE_LOCATION);
     }
 
-    // remove after abstract adapter implementation
-    public Optional<List<QuakeEntry>> getFilteredEntries(Optional<ArrayList<QuakeEntry>> quakeEntries,
-                                                         Filter filter) {
-        return quakeEntries.map(entries -> entries.stream()
-                                                  .filter(filter::satisfies)
-                                                  .collect(Collectors.toCollection(ArrayList::new)));
-    }
-
     public Optional<List<QuakeEntry>> getFilteredEntries(Filter filter) {
         return quakeEntries.map(entries -> entries.stream()
                                                   .filter(filter::satisfies)
@@ -44,7 +36,7 @@ public class EarthQuakeClient {
     public ArrayList<QuakeEntry> filterByClosestTo(ArrayList<QuakeEntry> quakeData,
                                                       long howMany,
                                                       Location from) {
-        ArrayList<QuakeEntry> answer = new ArrayList<QuakeEntry>();
+        ArrayList<QuakeEntry> answer = new ArrayList<>();
         if (quakeData.isEmpty()) {
             return new ArrayList<>();
         }

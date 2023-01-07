@@ -17,7 +17,7 @@ public abstract class AbstractAdapter {
     final EarthQuakeClient earthQuakeClient;
     final AbstractForm form;
 
-    public Optional<List<QuakeEntry>> filterBy(AbstractForm form) {
+    public Optional<List<QuakeEntry>> filterBy() {
         try {
             return earthQuakeClient.getFilteredEntries(initializeFilter());
         } catch (Exception e) {

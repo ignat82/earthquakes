@@ -1,6 +1,7 @@
 package com.example.earthquakes.web.controller;
 
 import com.example.earthquakes.EarthQuakeClient;
+import com.example.earthquakes.web.adapter.PhraseAdapter;
 import com.example.earthquakes.web.adapter.WebAdapter;
 import com.example.earthquakes.web.formdata.PhraseForm;
 import org.springframework.stereotype.Controller;
@@ -24,7 +25,7 @@ public class PhraseController extends AbstractController {
 
     @PostMapping(PATH)
     public String doPost(PhraseForm form) {
-        return super.doPost(form, webAdapter.filterByPhrase(form.getPhrase(),
-                                                            form.getPosition()));
+        PhraseAdapter adapter = new PhraseAdapter(earthQuakeClient, form);
+        return super.doPost(form, adapter.filterBy());
     }
 }
