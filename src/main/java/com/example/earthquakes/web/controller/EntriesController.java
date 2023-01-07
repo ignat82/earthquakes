@@ -17,10 +17,10 @@ import static com.example.earthquakes.entities.Constants.*;
 
 @Slf4j
 @Controller
-public class EarthQuakeController extends AbstractController {
+public class EntriesController extends AbstractController {
     private final String PATH = EARTHQUAKE_PATH;
 
-    public EarthQuakeController(WebAdapter webAdapter, EarthQuakeClient earthQuakeClient) {
+    public EntriesController(WebAdapter webAdapter, EarthQuakeClient earthQuakeClient) {
         super(webAdapter, earthQuakeClient, EARTHQUAKE_TEMPLATE);
     }
 
@@ -33,13 +33,13 @@ public class EarthQuakeController extends AbstractController {
     public String doPost(Entries form) {
         log.info("form data received {}", form);
         Optional<ArrayList<QuakeEntry>> parcedQuakeEntries
-                = webAdapter.getEntriesFromFile(form.getSource());
-        parcedQuakeEntries.ifPresent(q -> webAdapter.setQuakeEntries(Optional.of(
+                = earthQuakeClient.getEntriesFromFile(form.getSource());
+        parcedQuakeEntries.ifPresent(q -> earthQuakeClient.setQuakeEntries(Optional.of(
                 q.stream().map(QuakeEntry::copy)
                  .collect(Collectors.toCollection(ArrayList::new)))));
         form.setFormInvalid(parcedQuakeEntries.isEmpty());
-        form.setEntriesPresent(webAdapter.getQuakeEntries().isPresent());
-        webAdapter.getQuakeEntries().ifPresent(q -> q.forEach(e -> log.info(e.toString())));
+        form.setEntriesPresent(earthQuakeClient.getQuakeEntries().isPresent());
+        earthQuakeClient.getQuakeEntries().ifPresent(q -> q.forEach(e -> log.info(e.toString())));
         form.setOutput(parcedQuakeEntries.orElseGet(ArrayList::new).stream()
                                      .map(Object::toString)
                                      .collect(Collectors.joining("\n")));

@@ -4,6 +4,7 @@ import com.example.earthquakes.entities.Location;
 import com.example.earthquakes.entities.QuakeEntry;
 import com.example.earthquakes.filter.Filter;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +20,7 @@ import static com.example.earthquakes.entities.Constants.SOURCE_FILE_LOCATION;
 public class EarthQuakeClient {
     private final EarthQuakeParser earthQuakeParser;
     @Getter
+    @Setter
     private Optional<ArrayList<QuakeEntry>> quakeEntries;
     public EarthQuakeClient(EarthQuakeParser earthQuakeParser) {
         this.earthQuakeParser = earthQuakeParser;

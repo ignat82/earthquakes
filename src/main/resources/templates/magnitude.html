@@ -2,9 +2,9 @@
 <head><title>magnitude</title></head>
 <body>
 <h3>Filter by magnitude</h3>
-<pre th:if="${!magForm.entriesPresent}" th:style="'color:red;'">
+<pre th:if="${!magnitudeForm.entriesPresent}" th:style="'color:red;'">
     quake entries missing</pre>
-<form action="#" th:action="@{/earthquake/magnitude}" th:object="${magForm}"
+<form action="#" th:action="@{/earthquake/magnitude}" th:object="${magnitudeForm}"
       method="post">
     <label>minMag to Form by<br>
         <input type="text" width="200" th:field="*{minMag}">
@@ -14,13 +14,13 @@
     </label><br>
     <br><input type="submit" value="Submit"/><input type="reset" value="Reset"/>
 </form>
-<pre th:if="${magForm.formInvalid}" th:style="'color:red;'">
+<pre th:if="${magnitudeForm.formInvalid}" th:style="'color:red;'">
     form data invalid or no entries found</pre>
 <a th:href="@{~/earthquake/entries}">entries</a><br><br>
 
-<pre th:text="${magForm.number}" th:style="'color:red;'">
+<pre th:text="${magnitudeForm.number}" th:style="'color:red;'">
     number</pre>
-<pre th:text="${magForm.output}" th:style="'color:red;'">
+<pre th:text="${magnitudeForm.output}" th:style="'color:red;'">
     output</pre>
 
 </body>

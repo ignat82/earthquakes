@@ -4,7 +4,6 @@ import com.example.earthquakes.EarthQuakeClient;
 import com.example.earthquakes.EarthQuakeParser;
 import com.example.earthquakes.entities.Location;
 import com.example.earthquakes.entities.QuakeEntry;
-import com.example.earthquakes.filter.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +17,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.example.earthquakes.entities.Constants.SOURCE_FILE_LOCATION;
-import static com.example.earthquakes.web.formdata.PhraseForm.PhrasePosition;
 
 @Component
 @Slf4j
@@ -45,51 +43,6 @@ public class WebAdapter {
             return Optional.of(quakeEntries);
         } catch (Exception e) {
             log.error("failed to acquire absolute patch. exception is {}", e.toString());
-            return Optional.empty();
-        }
-    }
-
-    public Optional<List<QuakeEntry>> filterByDistance(String latitude,
-                                                       String longitude,
-                                                       String minDistance,
-                                                       String maxDistance) {
-        try {
-            double lat = Double.parseDouble(latitude);
-            double lon = Double.parseDouble(longitude);
-            DistanceFilter filter = new DistanceFilter(new Location(lat, lon),
-                                                             Double.parseDouble(minDistance),
-                                                             Double.parseDouble(maxDistance));
-            return earthQuakeClient.getFilteredEntries(quakeEntries, filter);
-        } catch (Exception e) {
-            return Optional.empty();
-        }
-    }
-
-    public Optional<List<QuakeEntry>> filterByMinMagnitude(String magMin) {
-        try {
-            MinMagFilter minMagFilter = new MinMagFilter(Double.parseDouble(magMin));
-            return earthQuakeClient.getFilteredEntries(quakeEntries, minMagFilter);
-        } catch (Exception e) {
-            return Optional.empty();
-        }
-    }
-
-    public Optional<List<QuakeEntry>> filterByMagnitude(String magMin, String magMax) {
-        try {
-            MagFilter magFilter = new MagFilter(Double.parseDouble(magMin),
-                                              Double.parseDouble(magMax));
-            return earthQuakeClient.getFilteredEntries(quakeEntries, magFilter);
-        } catch (Exception e) {
-            return Optional.empty();
-        }
-    }
-
-    public Optional<List<QuakeEntry>> filterByPhrase(String phrase,
-                                                     PhrasePosition position) {
-        try {
-            PhraseFilter phraseFilter = new PhraseFilter(position, phrase);
-            return earthQuakeClient.getFilteredEntries(quakeEntries, phraseFilter);
-        } catch (Exception e) {
             return Optional.empty();
         }
     }

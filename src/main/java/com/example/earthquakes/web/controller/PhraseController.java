@@ -14,7 +14,7 @@ public class PhraseController extends AbstractController {
     private final String PATH = PHRASE_PATH;
 
     public PhraseController(WebAdapter webAdapter, EarthQuakeClient earthQuakeClient) {
-        super(webAdapter, earthQuakeClient, DEPTH_TEMPLATE);
+        super(webAdapter, earthQuakeClient, PHRASE_TEMPLATE);
     }
 
     @GetMapping(PATH)

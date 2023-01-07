@@ -1,7 +1,7 @@
 package com.example.earthquakes.filter;
 
 import com.example.earthquakes.entities.QuakeEntry;
-import lombok.RequiredArgsConstructor;
+import com.example.earthquakes.web.formdata.MagnitudeForm;
 
 /**
  * Write a description of class MinMaxFilter here.
@@ -10,11 +10,16 @@ import lombok.RequiredArgsConstructor;
  * @version (a version number or a date)
  */
 
-@RequiredArgsConstructor
-public class MagFilter implements Filter {
+public class MagnitudeFilter implements Filter {
     private final double magMin;
     private final double magMax;
 
+    public MagnitudeFilter(MagnitudeForm magnitudeForm) {
+        magMin = Double.parseDouble(magnitudeForm.getMinMag());
+        magMax = Double.parseDouble(magnitudeForm.getMaxMag());
+    }
+
+    @Override
     public boolean satisfies(QuakeEntry qe) {
         return qe.getMagnitude() >= magMin && qe.getMagnitude() <= magMax;
     }

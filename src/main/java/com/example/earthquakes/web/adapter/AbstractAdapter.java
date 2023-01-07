@@ -2,7 +2,7 @@ package com.example.earthquakes.web.adapter;
 
 import com.example.earthquakes.EarthQuakeClient;
 import com.example.earthquakes.entities.QuakeEntry;
-import com.example.earthquakes.filter.AbstractFilter;
+import com.example.earthquakes.filter.EmptyFilter;
 import com.example.earthquakes.filter.Filter;
 import com.example.earthquakes.web.formdata.AbstractForm;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Slf4j
-public class AbstractAdapter {
+public abstract class AbstractAdapter {
     final EarthQuakeClient earthQuakeClient;
     final AbstractForm form;
 
@@ -27,6 +27,6 @@ public class AbstractAdapter {
     }
 
     public Filter initializeFilter() {
-        return new AbstractFilter();
+        return new EmptyFilter();
     }
 }
