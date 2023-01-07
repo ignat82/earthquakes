@@ -1,7 +1,7 @@
 package com.example.earthquakes.web.controller;
 
 import com.example.earthquakes.EarthQuakeClient;
-import com.example.earthquakes.web.adapter.WebAdapter;
+import com.example.earthquakes.web.adapter.ClosestAdapter;
 import com.example.earthquakes.web.formdata.ClosestForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,8 +13,8 @@ import static com.example.earthquakes.entities.Constants.*;
 public class ClosestController extends AbstractController {
     private final String PATH = CLOSEST_PATH;
 
-    public ClosestController(WebAdapter webAdapter, EarthQuakeClient earthQuakeClient) {
-        super(webAdapter, earthQuakeClient, DEPTH_TEMPLATE);
+    public ClosestController(EarthQuakeClient earthQuakeClient) {
+        super(earthQuakeClient, CLOSEST_TEMPLATE);
     }
 
     @GetMapping(PATH)
@@ -24,8 +24,9 @@ public class ClosestController extends AbstractController {
 
     @PostMapping(PATH)
     public String doPost(ClosestForm form) {
-        return super.doPost(form, webAdapter.filterByClosest(form.getLatitude(),
-                                                             form.getLongitude(),
-                                                             form.getHowMany()));
+        ClosestAdapter adapter = new ClosestAdapter(earthQuakeClient);
+        return super.doPost(form, adapter.filterByClosest(form.getLatitude(),
+                                                          form.getLongitude(),
+                                                          form.getHowMany()));
     }
 }

@@ -2,7 +2,6 @@ package com.example.earthquakes.web.controller;
 
 import com.example.earthquakes.EarthQuakeClient;
 import com.example.earthquakes.entities.QuakeEntry;
-import com.example.earthquakes.web.adapter.WebAdapter;
 import com.example.earthquakes.web.formdata.Entries;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -20,8 +19,8 @@ import static com.example.earthquakes.entities.Constants.*;
 public class EntriesController extends AbstractController {
     private final String PATH = EARTHQUAKE_PATH;
 
-    public EntriesController(WebAdapter webAdapter, EarthQuakeClient earthQuakeClient) {
-        super(webAdapter, earthQuakeClient, EARTHQUAKE_TEMPLATE);
+    public EntriesController(EarthQuakeClient earthQuakeClient) {
+        super(earthQuakeClient, EARTHQUAKE_TEMPLATE);
     }
 
     @GetMapping(PATH)

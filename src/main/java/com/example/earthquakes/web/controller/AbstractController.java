@@ -2,7 +2,6 @@ package com.example.earthquakes.web.controller;
 
 import com.example.earthquakes.EarthQuakeClient;
 import com.example.earthquakes.entities.QuakeEntry;
-import com.example.earthquakes.web.adapter.WebAdapter;
 import com.example.earthquakes.web.formdata.AbstractForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +14,6 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 public abstract class AbstractController {
-    final WebAdapter webAdapter;
     final EarthQuakeClient earthQuakeClient;
     private final String template;
 

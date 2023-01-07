@@ -33,9 +33,9 @@ public class EarthQuakeClient {
                                                   .collect(Collectors.toCollection(ArrayList::new)));
     }
 
-    public ArrayList<QuakeEntry> filterByClosestTo(ArrayList<QuakeEntry> quakeData,
-                                                      long howMany,
-                                                      Location from) {
+    public ArrayList<QuakeEntry> filterByClosestTo(long howMany,
+                                                   Location from) {
+        ArrayList<QuakeEntry> quakeData = deepCopy(quakeEntries).orElseGet(ArrayList::new);
         ArrayList<QuakeEntry> answer = new ArrayList<>();
         if (quakeData.isEmpty()) {
             return new ArrayList<>();
@@ -53,8 +53,8 @@ public class EarthQuakeClient {
         return answer;
     }
 
-    public ArrayList<QuakeEntry> filterByLargest(ArrayList<QuakeEntry> quakeData,
-                                                   long howMany) {
+    public ArrayList<QuakeEntry> filterByLargest(long howMany) {
+        ArrayList<QuakeEntry> quakeData = deepCopy(quakeEntries).orElseGet(ArrayList::new);
         ArrayList<QuakeEntry> answer = new ArrayList<>();
         if (quakeData.isEmpty()) {
             return new ArrayList<>();
@@ -119,6 +119,12 @@ public class EarthQuakeClient {
         for (QuakeEntry qe : list) {
             System.out.println(qe);
         }
+    }
+
+    Optional<ArrayList<QuakeEntry>> deepCopy(Optional<ArrayList<QuakeEntry>> source) {
+        return  Optional.of(source.orElseGet(ArrayList::new).stream()
+                                  .map(QuakeEntry::copy)
+                                  .collect(Collectors.toCollection(ArrayList::new)));
     }
 }
 

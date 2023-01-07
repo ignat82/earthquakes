@@ -2,7 +2,6 @@ package com.example.earthquakes.web.controller;
 
 import com.example.earthquakes.EarthQuakeClient;
 import com.example.earthquakes.web.adapter.MagnitudeAdapter;
-import com.example.earthquakes.web.adapter.WebAdapter;
 import com.example.earthquakes.web.formdata.MagnitudeForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +13,8 @@ import static com.example.earthquakes.entities.Constants.*;
 public class MagnitudeController extends AbstractController {
     private final String PATH = MAGNITUDE_PATH;
 
-    public MagnitudeController(WebAdapter webAdapter, EarthQuakeClient earthQuakeClient) {
-        super(webAdapter, earthQuakeClient, MAGNITUDE_TEMPLATE);
+    public MagnitudeController(EarthQuakeClient earthQuakeClient) {
+        super(earthQuakeClient, MAGNITUDE_TEMPLATE);
     }
 
     @GetMapping(PATH)
