@@ -6,16 +6,14 @@ import com.example.earthquakes.filter.Filter;
 import com.example.earthquakes.web.formdata.DepthForm;
 
 public class DepthAdapter extends AbstractAdapter {
-    private final DepthForm form;
 
     public DepthAdapter(EarthQuakeClient earthQuakeClient,
                         DepthForm form) {
-        super(earthQuakeClient);
-        this.form = form;
+        super(earthQuakeClient, form);
     }
 
     @Override
     public Filter initializeFilter() {
-        return (Filter) new DepthFilter(form);
+        return new DepthFilter((DepthForm) form);
     }
 }

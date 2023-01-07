@@ -4,7 +4,7 @@ public class Constants {
     public static final String SOURCE_FILE_LOCATION
             = "\\data\\nov20quakedatasmall.atom";
     public static final String BASE_PATH = "/earthquake/";
-    public static final String EARTHQUAKE_TEMPLATE = "earthquake";
+    public static final String EARTHQUAKE_TEMPLATE = "entries";
     public static final String EARTHQUAKE_PATH = BASE_PATH + EARTHQUAKE_TEMPLATE;
     public static final String MAX_DISTANCE_TEMPLATE = "max_distance";
     public static final String MAX_DISTANCE_PATH = BASE_PATH + MAX_DISTANCE_TEMPLATE;

@@ -21,7 +21,7 @@ public class EarthQuakeController extends AbstractController {
     private final String PATH = EARTHQUAKE_PATH;
 
     public EarthQuakeController(WebAdapter webAdapter, EarthQuakeClient earthQuakeClient) {
-        super(webAdapter, earthQuakeClient, DEPTH_TEMPLATE);
+        super(webAdapter, earthQuakeClient, EARTHQUAKE_TEMPLATE);
     }
 
     @GetMapping(PATH)

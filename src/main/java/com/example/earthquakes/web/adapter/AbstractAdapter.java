@@ -6,18 +6,22 @@ import com.example.earthquakes.filter.AbstractFilter;
 import com.example.earthquakes.filter.Filter;
 import com.example.earthquakes.web.formdata.AbstractForm;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
+@Slf4j
 public class AbstractAdapter {
     final EarthQuakeClient earthQuakeClient;
+    final AbstractForm form;
 
     public Optional<List<QuakeEntry>> filterBy(AbstractForm form) {
         try {
             return earthQuakeClient.getFilteredEntries(initializeFilter());
         } catch (Exception e) {
+            log.error("caught exception while filtering entries {}", e.toString());
             return Optional.empty();
         }
     }

@@ -49,29 +49,6 @@ public class WebAdapter {
         }
     }
 
-//    public Optional<List<QuakeEntry>> filterByDepth(DepthForm form) {
-//        try {
-//            DepthFilter filter = new DepthFilter(form);
-//            return earthQuakeClient.getFilteredEntries(quakeEntries, filter);
-//        } catch (Exception e) {
-//            return Optional.empty();
-//        }
-//    }
-
-    public Optional<List<QuakeEntry>> filterByMaxDistance(String latitude,
-                                                       String longitude,
-                                                       String maxDistance) {
-        try {
-            double lat = Double.parseDouble(latitude);
-            double lon = Double.parseDouble(longitude);
-            MaxDistanceFilter filter = new MaxDistanceFilter(new Location(lat, lon),
-                                                             Double.parseDouble(maxDistance));
-            return earthQuakeClient.getFilteredEntries(quakeEntries, filter);
-        } catch (Exception e) {
-            return Optional.empty();
-        }
-    }
-
     public Optional<List<QuakeEntry>> filterByDistance(String latitude,
                                                        String longitude,
                                                        String minDistance,
