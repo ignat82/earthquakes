@@ -13,8 +13,9 @@ import static com.example.earthquakes.entities.Constants.*;
 public class ClosestController extends AbstractController {
     private final String PATH = CLOSEST_PATH;
 
-    public ClosestController(EarthQuakeClient earthQuakeClient) {
-        super(earthQuakeClient, CLOSEST_TEMPLATE);
+    public ClosestController(EarthQuakeClient earthQuakeClient,
+                             ClosestAdapter adapter) {
+        super(earthQuakeClient, adapter, CLOSEST_TEMPLATE);
     }
 
     @GetMapping(PATH)
@@ -25,8 +26,6 @@ public class ClosestController extends AbstractController {
     @PostMapping(PATH)
     public String doPost(ClosestForm form) {
         ClosestAdapter adapter = new ClosestAdapter(earthQuakeClient);
-        return super.doPost(form, adapter.filterByClosest(form.getLatitude(),
-                                                          form.getLongitude(),
-                                                          form.getHowMany()));
+        return super.doPost(form, adapter.filterBy(form));
     }
 }

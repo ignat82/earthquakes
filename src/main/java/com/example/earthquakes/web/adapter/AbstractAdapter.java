@@ -14,8 +14,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Slf4j
 public abstract class AbstractAdapter {
-    final EarthQuakeClient earthQuakeClient;
-    final AbstractForm form;
+    protected final EarthQuakeClient earthQuakeClient;
 
     public Optional<List<QuakeEntry>> filterBy(AbstractForm form) {
         try {

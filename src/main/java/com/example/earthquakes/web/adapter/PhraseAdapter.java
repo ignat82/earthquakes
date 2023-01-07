@@ -5,11 +5,12 @@ import com.example.earthquakes.filter.Filter;
 import com.example.earthquakes.filter.PhraseFilter;
 import com.example.earthquakes.web.formdata.AbstractForm;
 import com.example.earthquakes.web.formdata.PhraseForm;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PhraseAdapter extends AbstractAdapter {
-    public PhraseAdapter(EarthQuakeClient earthQuakeClient,
-                         PhraseForm form) {
-        super(earthQuakeClient, form);
+    public PhraseAdapter(EarthQuakeClient earthQuakeClient) {
+        super(earthQuakeClient);
     }
 
     @Override

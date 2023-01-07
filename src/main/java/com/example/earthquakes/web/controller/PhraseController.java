@@ -13,8 +13,9 @@ import static com.example.earthquakes.entities.Constants.*;
 public class PhraseController extends AbstractController {
     private final String PATH = PHRASE_PATH;
 
-    public PhraseController(EarthQuakeClient earthQuakeClient) {
-        super(earthQuakeClient, PHRASE_TEMPLATE);
+    public PhraseController(EarthQuakeClient earthQuakeClient,
+                            PhraseAdapter adapter) {
+        super(earthQuakeClient, adapter, DISTANCE_TEMPLATE);
     }
 
     @GetMapping(PATH)
@@ -24,7 +25,7 @@ public class PhraseController extends AbstractController {
 
     @PostMapping(PATH)
     public String doPost(PhraseForm form) {
-        PhraseAdapter adapter = new PhraseAdapter(earthQuakeClient, form);
+        PhraseAdapter adapter = new PhraseAdapter(earthQuakeClient);
         return super.doPost(form, adapter.filterBy(form));
     }
 }

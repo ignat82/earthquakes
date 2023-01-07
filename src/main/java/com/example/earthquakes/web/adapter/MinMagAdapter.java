@@ -5,11 +5,12 @@ import com.example.earthquakes.filter.Filter;
 import com.example.earthquakes.filter.MinMagFilter;
 import com.example.earthquakes.web.formdata.AbstractForm;
 import com.example.earthquakes.web.formdata.MinMagForm;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MinMagAdapter extends AbstractAdapter {
-    public MinMagAdapter(EarthQuakeClient earthQuakeClient,
-                         MinMagForm form) {
-        super(earthQuakeClient, form);
+    public MinMagAdapter(EarthQuakeClient earthQuakeClient) {
+        super(earthQuakeClient);
     }
 
     @Override

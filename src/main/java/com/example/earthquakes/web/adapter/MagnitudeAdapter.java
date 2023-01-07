@@ -5,12 +5,13 @@ import com.example.earthquakes.filter.Filter;
 import com.example.earthquakes.filter.MagnitudeFilter;
 import com.example.earthquakes.web.formdata.AbstractForm;
 import com.example.earthquakes.web.formdata.MagnitudeForm;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MagnitudeAdapter extends AbstractAdapter {
 
-    public MagnitudeAdapter(EarthQuakeClient earthQuakeClient,
-                            MagnitudeForm form) {
-        super(earthQuakeClient, form);
+    public MagnitudeAdapter(EarthQuakeClient earthQuakeClient) {
+        super(earthQuakeClient);
     }
 
     @Override

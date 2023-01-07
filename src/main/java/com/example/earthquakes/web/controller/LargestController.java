@@ -13,8 +13,9 @@ import static com.example.earthquakes.entities.Constants.*;
 public class LargestController extends AbstractController {
     private final String PATH = LARGEST_PATH;
 
-    public LargestController(EarthQuakeClient earthQuakeClient) {
-        super(earthQuakeClient, LARGEST_TEMPLATE);
+    public LargestController(EarthQuakeClient earthQuakeClient,
+                             LargestAdapter adapter) {
+        super(earthQuakeClient, adapter, DISTANCE_TEMPLATE);
     }
 
     @GetMapping(PATH)
@@ -25,6 +26,6 @@ public class LargestController extends AbstractController {
     @PostMapping(PATH)
     public String doPost(LargestForm form) {
         LargestAdapter adapter = new LargestAdapter(earthQuakeClient);
-        return super.doPost(form, adapter.filterByLargest(form.getHowMany()));
+        return super.doPost(form, adapter.filterBy(form));
     }
 }

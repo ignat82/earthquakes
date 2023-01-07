@@ -5,12 +5,13 @@ import com.example.earthquakes.filter.Filter;
 import com.example.earthquakes.filter.MaxDistanceFilter;
 import com.example.earthquakes.web.formdata.AbstractForm;
 import com.example.earthquakes.web.formdata.MaxDistanceForm;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MaxDistanceAdapter extends AbstractAdapter {
 
-    public MaxDistanceAdapter(EarthQuakeClient earthQuakeClient,
-                              MaxDistanceForm form) {
-        super(earthQuakeClient, form);
+    public MaxDistanceAdapter(EarthQuakeClient earthQuakeClient) {
+        super(earthQuakeClient);
     }
 
     @Override

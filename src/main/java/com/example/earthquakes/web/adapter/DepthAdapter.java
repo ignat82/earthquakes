@@ -5,12 +5,13 @@ import com.example.earthquakes.filter.DepthFilter;
 import com.example.earthquakes.filter.Filter;
 import com.example.earthquakes.web.formdata.AbstractForm;
 import com.example.earthquakes.web.formdata.DepthForm;
+import org.springframework.stereotype.Component;
 
+@Component
 public class DepthAdapter extends AbstractAdapter {
 
-    public DepthAdapter(EarthQuakeClient earthQuakeClient,
-                        DepthForm form) {
-        super(earthQuakeClient, form);
+    public DepthAdapter(EarthQuakeClient earthQuakeClient) {
+        super(earthQuakeClient);
     }
 
     @Override

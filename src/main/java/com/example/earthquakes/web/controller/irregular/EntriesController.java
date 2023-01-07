@@ -1,8 +1,9 @@
-package com.example.earthquakes.web.controller;
+package com.example.earthquakes.web.controller.irregular;
 
 import com.example.earthquakes.EarthQuakeClient;
 import com.example.earthquakes.entities.QuakeEntry;
 import com.example.earthquakes.web.formdata.Entries;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,20 +13,22 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.example.earthquakes.entities.Constants.*;
+import static com.example.earthquakes.entities.Constants.EARTHQUAKE_PATH;
+import static com.example.earthquakes.entities.Constants.EARTHQUAKE_TEMPLATE;
 
 @Slf4j
 @Controller
-public class EntriesController extends AbstractController {
+@RequiredArgsConstructor
+public class EntriesController {
     private final String PATH = EARTHQUAKE_PATH;
+    private final String TEMPLATE = EARTHQUAKE_TEMPLATE;
+    private final EarthQuakeClient earthQuakeClient;
 
-    public EntriesController(EarthQuakeClient earthQuakeClient) {
-        super(earthQuakeClient, EARTHQUAKE_TEMPLATE);
-    }
 
     @GetMapping(PATH)
     public String doGet(Entries form) {
-        return super.doGet(form);
+        form.setEntriesPresent(earthQuakeClient.getQuakeEntries().isPresent());
+        return TEMPLATE;
     }
 
     @PostMapping(PATH)

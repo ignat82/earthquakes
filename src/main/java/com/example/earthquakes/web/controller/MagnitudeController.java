@@ -13,8 +13,9 @@ import static com.example.earthquakes.entities.Constants.*;
 public class MagnitudeController extends AbstractController {
     private final String PATH = MAGNITUDE_PATH;
 
-    public MagnitudeController(EarthQuakeClient earthQuakeClient) {
-        super(earthQuakeClient, MAGNITUDE_TEMPLATE);
+    public MagnitudeController(EarthQuakeClient earthQuakeClient,
+                               MagnitudeAdapter adapter) {
+        super(earthQuakeClient, adapter, DISTANCE_TEMPLATE);
     }
 
     @GetMapping(PATH)
@@ -24,7 +25,7 @@ public class MagnitudeController extends AbstractController {
 
     @PostMapping(PATH)
     public String doPost(MagnitudeForm form) {
-        MagnitudeAdapter adapter = new MagnitudeAdapter(earthQuakeClient, form);
+        MagnitudeAdapter adapter = new MagnitudeAdapter(earthQuakeClient);
         return super.doPost(form, adapter.filterBy(form));
     }
 }

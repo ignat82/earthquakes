@@ -13,8 +13,9 @@ import static com.example.earthquakes.entities.Constants.*;
 public class MinMagController extends AbstractController {
     private final String PATH = MIN_MAG_PATH;
 
-    public MinMagController(EarthQuakeClient earthQuakeClient) {
-        super(earthQuakeClient, MIN_MAG_TEMPLATE);
+    public MinMagController(EarthQuakeClient earthQuakeClient,
+                            MinMagAdapter adapter) {
+        super(earthQuakeClient, adapter, DISTANCE_TEMPLATE);
     }
 
     @GetMapping(PATH)
@@ -24,7 +25,7 @@ public class MinMagController extends AbstractController {
 
     @PostMapping(PATH)
     public String doPost(MinMagForm form) {
-        MinMagAdapter adapter = new MinMagAdapter(earthQuakeClient, form);
+        MinMagAdapter adapter = new MinMagAdapter(earthQuakeClient);
         return super.doPost(form, adapter.filterBy(form));
     }
 }

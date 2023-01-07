@@ -5,12 +5,13 @@ import com.example.earthquakes.filter.DistanceFilter;
 import com.example.earthquakes.filter.Filter;
 import com.example.earthquakes.web.formdata.AbstractForm;
 import com.example.earthquakes.web.formdata.DistanceForm;
+import org.springframework.stereotype.Component;
 
+@Component
 public class DistanceAdapter extends AbstractAdapter {
 
-    public DistanceAdapter(EarthQuakeClient earthQuakeClient,
-                           DistanceForm form) {
-        super(earthQuakeClient, form);
+    public DistanceAdapter(EarthQuakeClient earthQuakeClient) {
+        super(earthQuakeClient);
     }
 
     @Override
