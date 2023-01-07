@@ -1,8 +1,8 @@
-package com.example.earthquakes.web.adapter.irregular;
+package com.example.earthquakes.web.adapter.single.irregular;
 
 import com.example.earthquakes.EarthQuakeClient;
 import com.example.earthquakes.entities.QuakeEntry;
-import com.example.earthquakes.web.adapter.single.AbstractSingleFilterAdapter;
+import com.example.earthquakes.web.adapter.AbstractAdapter;
 import com.example.earthquakes.web.formdata.AbstractForm;
 import com.example.earthquakes.web.formdata.LargestForm;
 import org.springframework.stereotype.Component;
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class LargestAdapter extends AbstractSingleFilterAdapter {
+public class LargestAdapter extends AbstractAdapter {
 
     public LargestAdapter(EarthQuakeClient earthQuakeClient) {
         super(earthQuakeClient);
