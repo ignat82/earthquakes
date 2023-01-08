@@ -25,7 +25,6 @@ public class LargestController extends AbstractController {
 
     @PostMapping(PATH)
     public String doPost(LargestForm form) {
-        LargestAdapter adapter = new LargestAdapter(earthQuakeClient);
-        return super.doPost(form, adapter.filterBy(form));
+        return super.doPost(form);
     }
 }

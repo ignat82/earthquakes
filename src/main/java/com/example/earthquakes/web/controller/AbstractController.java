@@ -24,10 +24,10 @@ public abstract class AbstractController {
         return template;
     }
 
-    String doPost(AbstractForm form,
-                  Optional<List<QuakeEntry>> filteredQuakes) {
+    String doPost(AbstractForm form) {
         log.info("form data received {}", form);
         form.setEntriesPresent(earthQuakeClient.getQuakeEntries().isPresent());
+        Optional<List<QuakeEntry>> filteredQuakes = adapter.filterBy(form);
         form.setFormInvalid(filteredQuakes.isEmpty());
         filteredQuakes.ifPresent(e -> log.info(e.toString()));
         log.info("got {} entries", filteredQuakes.orElseGet(ArrayList::new).size());

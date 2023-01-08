@@ -25,7 +25,6 @@ public class ClosestController extends AbstractController {
 
     @PostMapping(PATH)
     public String doPost(ClosestForm form) {
-        ClosestAdapter adapter = new ClosestAdapter(earthQuakeClient);
-        return super.doPost(form, adapter.filterBy(form));
+        return super.doPost(form);
     }
 }

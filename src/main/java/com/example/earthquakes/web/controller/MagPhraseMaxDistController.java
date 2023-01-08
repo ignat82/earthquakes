@@ -26,7 +26,7 @@ public class MagPhraseMaxDistController extends AbstractController {
 
     @PostMapping(PATH)
     public String doPost(MagPhraseMaxDistForm form) {
-        return super.doPost(form, adapter.filterBy(form));
+        return super.doPost(form);
     }
 
 }

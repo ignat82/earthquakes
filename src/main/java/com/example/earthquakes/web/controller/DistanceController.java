@@ -25,7 +25,6 @@ public class DistanceController extends AbstractController {
 
     @PostMapping(PATH)
     public String doPost(DistanceForm form) {
-        DistanceAdapter adapter = new DistanceAdapter(earthQuakeClient);
-        return super.doPost(form, adapter.filterBy(form));
+        return super.doPost(form);
     }
 }
