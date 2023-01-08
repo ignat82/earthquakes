@@ -11,10 +11,11 @@ import com.example.earthquakes.web.formdata.MinMagForm;
  */
 
 
-public class MinMagFilter implements Filter {
+public class MinMagFilter extends AbstractFilter implements Filter {
     private final double magMin;
 
     public MinMagFilter(MinMagForm minMagForm) {
+        super(MinMagForm.class.getName());
         magMin = Double.parseDouble(minMagForm.getMinMag());
     }
 

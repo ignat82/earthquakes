@@ -9,5 +9,6 @@ import com.example.earthquakes.entities.QuakeEntry;
  * @version (a version number or a date)
  */
 public interface Filter {
-    public  boolean satisfies(QuakeEntry qe);
+    boolean satisfies(QuakeEntry qe);
+    String getName();
 }
