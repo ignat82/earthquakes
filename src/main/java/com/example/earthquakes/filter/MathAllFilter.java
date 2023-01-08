@@ -25,6 +25,6 @@ public class MathAllFilter extends AbstractFilter implements Filter {
         return "applied filters :\n" +
                 filters.stream()
                 .map(Filter::getName)
-                .collect(Collectors.joining("\n"));
+                .collect(Collectors.joining(""));
     }
 }

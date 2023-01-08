@@ -25,6 +25,15 @@ public abstract class AbstractAdapter {
         }
     }
 
+    public String getFilterName(AbstractForm form) {
+        try {
+            return initializeFilter(form).getName();
+        } catch (Exception e) {
+            log.error("caught exception while filtering entries {}", e.toString());
+            return "";
+        }
+    }
+
     public Filter initializeFilter(AbstractForm form) {
         return new EmptyFilter();
     }

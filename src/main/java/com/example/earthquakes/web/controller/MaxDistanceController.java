@@ -7,8 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import static com.example.earthquakes.entities.Constants.DISTANCE_TEMPLATE;
-import static com.example.earthquakes.entities.Constants.MAX_DISTANCE_PATH;
+import static com.example.earthquakes.entities.Constants.*;
 
 @Controller
 public class MaxDistanceController extends AbstractController {
@@ -16,7 +15,7 @@ public class MaxDistanceController extends AbstractController {
 
     public MaxDistanceController(EarthQuakeClient earthQuakeClient,
                                  MagnitudeAdapter adapter) {
-        super(earthQuakeClient, adapter, DISTANCE_TEMPLATE);
+        super(earthQuakeClient, adapter, MAX_DISTANCE_TEMPLATE);
     }
 
     @GetMapping(PATH)

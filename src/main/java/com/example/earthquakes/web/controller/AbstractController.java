@@ -31,7 +31,8 @@ public abstract class AbstractController {
         form.setFormInvalid(filteredQuakes.isEmpty());
         filteredQuakes.ifPresent(e -> log.info(e.toString()));
         log.info("got {} entries", filteredQuakes.orElseGet(ArrayList::new).size());
-        form.setOutput(filteredQuakes.orElseGet(ArrayList::new).stream()
+        form.setOutput(adapter.getFilterName(form)
+                       + filteredQuakes.orElseGet(ArrayList::new).stream()
                                      .map(Object::toString)
                                      .collect(Collectors.joining("\n")));
         form.setNumber(filteredQuakes.orElseGet(ArrayList::new).size());
