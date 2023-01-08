@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class MagnitudeForm extends AbstractForm{
+public class MagnitudeForm extends AbstractForm {
     private String minMag;
     private String maxMag;
 }

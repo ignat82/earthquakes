@@ -1,0 +1,45 @@
+<html>
+<head><title>MagPhraseMaxDist</title></head>
+<body>
+<h3>Filter by MagPhraseMaxDist</h3>
+<pre th:if="${!magPhraseMaxDistForm.entriesPresent}" th:style="'color:red;'">
+    quake entries missing</pre>
+<form action="#" th:action="@{/earthquake/mag_phrase_max_distance}" th:object="${magPhraseMaxDistForm}"
+      method="post">
+    <label>minMag to Form by<br>
+        <input type="text" width="200" th:field="*{minMag}">
+    </label><br>
+    <label>maxMag to Form by<br>
+        <input type="text" width="200" th:field="*{maxMag}">
+    </label><br>
+    <label>phrase<br>
+        <input type="text" width="200" th:field="*{phrase}">
+    </label><br><br>
+    <label>position</label><br>
+    <div th:each="position : ${T(com.example.earthquakes.web.formdata.PhraseForm.PhrasePosition).values()}">
+        <input type="radio" th:field="*{position}" th:value="${position}">
+        <label th:text="${position.getString()}">position</label>
+        <br>
+    </div>
+    <label>latitude<br>
+        <input type="text" width="200" th:field="*{latitude}">
+    </label><br>
+    <label>longitude<br>
+        <input type="text" width="200" th:field="*{longitude}">
+    </label><br>
+    <label>max distance<br>
+        <input type="text" width="200" th:field="*{maxDistance}">
+    </label><br>
+    <br><input type="submit" value="Submit"/><input type="reset" value="Reset"/>
+</form>
+<pre th:if="${magPhraseMaxDistForm.formInvalid}" th:style="'color:red;'">
+    form data invalid</pre>
+<a th:href="@{~/earthquake/entries}">entries</a><br><br>
+
+<pre th:text="${magPhraseMaxDistForm.number}" th:style="'color:red;'">
+    number</pre>
+<pre th:text="${magPhraseMaxDistForm.output}" th:style="'color:red;'">
+    output</pre>
+
+</body>
+</html>
