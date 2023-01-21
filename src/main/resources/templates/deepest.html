@@ -1,0 +1,23 @@
+<html>
+<head><title>Deepest</title></head>
+<body>
+<h3>Sort by deepest</h3>
+<pre th:if="${!deepestForm.entriesPresent}" th:style="'color:red;'">
+    quake entries missing</pre>
+<form action="#" th:action="@{/earthquake/deepest}" th:object="${deepestForm}"
+      method="post">
+    <label>howMany<br>
+        <input type="text" width="200" th:field="*{howMany}">
+    </label><br>
+    <br><input type="submit" value="submit"/><input type="reset" value="Reset"/>
+</form>
+<pre th:if="${deepestForm.formInvalid}" th:style="'color:red;'">
+    form data invalid</pre>
+<a th:href="@{~/earthquake/entries}">entries</a><br><br>
+
+<pre th:text="${deepestForm.number}" th:style="'color:red;'">
+    number</pre>
+<pre th:text="${deepestForm.output}" th:style="'color:red;'">
+    output</pre>
+</body>
+</html>

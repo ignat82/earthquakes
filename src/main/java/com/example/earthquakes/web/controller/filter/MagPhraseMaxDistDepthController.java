@@ -1,4 +1,4 @@
-package com.example.earthquakes.web.controller;
+package com.example.earthquakes.web.controller.filter;
 
 import com.example.earthquakes.EarthQuakeClient;
 import com.example.earthquakes.web.adapter.multi.MagPhraseMaxDistDepthAdapter;
@@ -11,7 +11,7 @@ import static com.example.earthquakes.entities.Constants.MAG_PHRASE_MAX_DIST_PAT
 import static com.example.earthquakes.entities.Constants.MAG_PHRASE_MAX_DIST_TEMPLATE;
 
 @Controller
-public class MagPhraseMaxDistDepthController extends AbstractController {
+public class MagPhraseMaxDistDepthController extends AbstractFilterController {
     private final String PATH = MAG_PHRASE_MAX_DIST_PATH;
 
     public MagPhraseMaxDistDepthController(EarthQuakeClient earthQuakeClient,

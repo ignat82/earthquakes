@@ -1,8 +1,8 @@
-package com.example.earthquakes.web.controller;
+package com.example.earthquakes.web.controller.filter;
 
 import com.example.earthquakes.EarthQuakeClient;
 import com.example.earthquakes.entities.QuakeEntry;
-import com.example.earthquakes.web.adapter.AbstractAdapter;
+import com.example.earthquakes.web.adapter.single.filter.AbstractFilterAdapter;
 import com.example.earthquakes.web.formdata.AbstractForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,9 +14,9 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
-public abstract class AbstractController {
+public abstract class AbstractFilterController {
     final EarthQuakeClient earthQuakeClient;
-    final AbstractAdapter adapter;
+    final AbstractFilterAdapter adapter;
     private final String template;
 
     String doGet(AbstractForm form) {

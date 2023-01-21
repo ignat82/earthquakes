@@ -2,7 +2,7 @@ package com.example.earthquakes.web.adapter.multi;
 
 import com.example.earthquakes.EarthQuakeClient;
 import com.example.earthquakes.filter.*;
-import com.example.earthquakes.web.adapter.AbstractAdapter;
+import com.example.earthquakes.web.adapter.single.filter.AbstractFilterAdapter;
 import com.example.earthquakes.web.formdata.AbstractForm;
 import com.example.earthquakes.web.formdata.MagPhraseMaxDistDepthForm;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class MagPhraseMaxDistDepthAdapter extends AbstractAdapter {
+public class MagPhraseMaxDistDepthAdapter extends AbstractFilterAdapter {
     public MagPhraseMaxDistDepthAdapter(EarthQuakeClient earthQuakeClient) {
         super(earthQuakeClient);
     }

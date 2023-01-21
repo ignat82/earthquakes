@@ -1,16 +1,17 @@
-package com.example.earthquakes.web.controller;
+package com.example.earthquakes.web.controller.filter;
 
 import com.example.earthquakes.EarthQuakeClient;
-import com.example.earthquakes.web.adapter.single.PhraseAdapter;
+import com.example.earthquakes.web.adapter.single.filter.PhraseAdapter;
 import com.example.earthquakes.web.formdata.PhraseForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import static com.example.earthquakes.entities.Constants.*;
+import static com.example.earthquakes.entities.Constants.PHRASE_PATH;
+import static com.example.earthquakes.entities.Constants.PHRASE_TEMPLATE;
 
 @Controller
-public class PhraseController extends AbstractController {
+public class PhraseController extends AbstractFilterController {
     private final String PATH = PHRASE_PATH;
 
     public PhraseController(EarthQuakeClient earthQuakeClient,

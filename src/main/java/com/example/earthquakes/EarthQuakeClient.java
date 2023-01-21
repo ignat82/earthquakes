@@ -38,9 +38,11 @@ public class EarthQuakeClient {
         log.info("sorting with comparator {}", quakeEntryComparator.getName());
         List<QuakeEntry> quakeData
                 = deepCopy(quakeEntries).orElseGet(ArrayList::new);
+        log.info("quake data has {} entries", quakeData.size());
         List<QuakeEntry> sortedEntries = new ArrayList<>();
         while (howMany-- > 0 && !quakeData.isEmpty()) {
             QuakeEntry nearestQuake = Collections.min(quakeData, quakeEntryComparator);
+            log.info("got min entry - {}", nearestQuake.toString());
             sortedEntries.add(nearestQuake);
             quakeData.remove(nearestQuake);
         }

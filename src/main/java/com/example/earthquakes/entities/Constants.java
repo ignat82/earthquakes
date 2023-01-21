@@ -4,6 +4,8 @@ public class Constants {
     public static final String SOURCE_FILE_LOCATION
             = "\\data\\nov20quakedatasmall.atom";
     public static final String BASE_PATH = "/earthquake/";
+    public static final String DEEPEST_TEMPLATE = "deepest";
+    public static final String DEEPEST_PATH = BASE_PATH + DEEPEST_TEMPLATE;
     public static final String MAG_PHRASE_MAX_DIST_TEMPLATE = "mag_phrase_max_dist_depth";
     public static final String MAG_PHRASE_MAX_DIST_PATH = BASE_PATH + MAG_PHRASE_MAX_DIST_TEMPLATE;
     public static final String EARTHQUAKE_TEMPLATE = "entries";
