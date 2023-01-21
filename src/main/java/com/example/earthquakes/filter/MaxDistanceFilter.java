@@ -24,6 +24,6 @@ public class MaxDistanceFilter extends AbstractFilter implements Filter {
         this.maxDistance = Double.parseDouble(maxDistance);
     }
     public boolean satisfies(QuakeEntry qe) {
-        return qe.getLocation().distanceTo(location) < maxDistance;
+        return qe.getLocation().distanceTo(location) <= maxDistance;
     }
 }

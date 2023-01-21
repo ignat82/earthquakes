@@ -15,7 +15,7 @@ public class PhraseController extends AbstractController {
 
     public PhraseController(EarthQuakeClient earthQuakeClient,
                             PhraseAdapter adapter) {
-        super(earthQuakeClient, adapter, DISTANCE_TEMPLATE);
+        super(earthQuakeClient, adapter, PHRASE_TEMPLATE);
     }
 
     @GetMapping(PATH)

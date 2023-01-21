@@ -13,8 +13,14 @@ public class DepthFilter extends AbstractFilter implements Filter {
         maxDepth = Double.parseDouble(depthForm.getMaxDepth());
     }
 
+    public DepthFilter(String minDepth, String maxDepth) {
+        super(DepthFilter.class.getName());
+        this.minDepth = Double.parseDouble(minDepth);
+        this.maxDepth = Double.parseDouble(maxDepth);
+    }
+
     @Override
     public boolean satisfies(QuakeEntry qe) {
-        return (qe.getDepth() < maxDepth && qe.getDepth() > minDepth);
+        return (qe.getDepth() <= maxDepth && qe.getDepth() >= minDepth);
     }
 }

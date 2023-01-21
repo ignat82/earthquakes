@@ -1,10 +1,10 @@
 <html>
-<head><title>MagPhraseMaxDist</title></head>
+<head><title>MagPhraseMaxDistDepth</title></head>
 <body>
-<h3>Filter by MagPhraseMaxDist</h3>
-<pre th:if="${!magPhraseMaxDistForm.entriesPresent}" th:style="'color:red;'">
+<h3>Filter by MagPhraseMaxDistDepth</h3>
+<pre th:if="${!magPhraseMaxDistDepthForm.entriesPresent}" th:style="'color:red;'">
     quake entries missing</pre>
-<form action="#" th:action="@{/earthquake/mag_phrase_max_distance}" th:object="${magPhraseMaxDistForm}"
+<form action="#" th:action="@{/earthquake/mag_phrase_max_dist_depth}" th:object="${magPhraseMaxDistDepthForm}"
       method="post">
     <label>minMag to Form by<br>
         <input type="text" width="200" th:field="*{minMag}">
@@ -30,15 +30,21 @@
     <label>max distance<br>
         <input type="text" width="200" th:field="*{maxDistance}">
     </label><br>
+    <label>min depth<br>
+        <input type="text" width="200" th:field="*{minDepth}">
+    </label><br>
+    <label>max depth<br>
+        <input type="text" width="200" th:field="*{maxDepth}">
+    </label><br>
     <br><input type="submit" value="Submit"/><input type="reset" value="Reset"/>
 </form>
-<pre th:if="${magPhraseMaxDistForm.formInvalid}" th:style="'color:red;'">
+<pre th:if="${magPhraseMaxDistDepthForm.formInvalid}" th:style="'color:red;'">
     form data invalid</pre>
 <a th:href="@{~/earthquake/entries}">entries</a><br><br>
 
-<pre th:text="${magPhraseMaxDistForm.number}" th:style="'color:red;'">
+<pre th:text="${magPhraseMaxDistDepthForm.number}" th:style="'color:red;'">
     number</pre>
-<pre th:text="${magPhraseMaxDistForm.output}" th:style="'color:red;'">
+<pre th:text="${magPhraseMaxDistDepthForm.output}" th:style="'color:red;'">
     output</pre>
 
 </body>

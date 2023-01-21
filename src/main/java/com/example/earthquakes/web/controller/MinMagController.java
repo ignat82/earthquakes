@@ -15,7 +15,7 @@ public class MinMagController extends AbstractController {
 
     public MinMagController(EarthQuakeClient earthQuakeClient,
                             MinMagAdapter adapter) {
-        super(earthQuakeClient, adapter, DISTANCE_TEMPLATE);
+        super(earthQuakeClient, adapter, MIN_MAG_TEMPLATE);
     }
 
     @GetMapping(PATH)

@@ -1,6 +1,7 @@
 package com.example.earthquakes.web.adapter.single.irregular;
 
 import com.example.earthquakes.EarthQuakeClient;
+import com.example.earthquakes.comparator.MagnitudeComparator;
 import com.example.earthquakes.entities.QuakeEntry;
 import com.example.earthquakes.web.adapter.AbstractAdapter;
 import com.example.earthquakes.web.formdata.AbstractForm;
@@ -22,7 +23,7 @@ public class LargestAdapter extends AbstractAdapter {
         try {
             LargestForm form = (LargestForm) abstractForm;
             long numb = Long.parseLong(form.getHowMany());
-            return Optional.of(earthQuakeClient.filterByLargest(numb));
+            return earthQuakeClient.getSortedBy(numb, new MagnitudeComparator());
         } catch (Exception e) {
             return Optional.empty();
         }

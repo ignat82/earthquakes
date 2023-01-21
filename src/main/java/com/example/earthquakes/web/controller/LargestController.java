@@ -15,7 +15,7 @@ public class LargestController extends AbstractController {
 
     public LargestController(EarthQuakeClient earthQuakeClient,
                              LargestAdapter adapter) {
-        super(earthQuakeClient, adapter, DISTANCE_TEMPLATE);
+        super(earthQuakeClient, adapter, LARGEST_TEMPLATE);
     }
 
     @GetMapping(PATH)

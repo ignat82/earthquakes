@@ -15,7 +15,7 @@ public class MagnitudeController extends AbstractController {
 
     public MagnitudeController(EarthQuakeClient earthQuakeClient,
                                MagnitudeAdapter adapter) {
-        super(earthQuakeClient, adapter, DISTANCE_TEMPLATE);
+        super(earthQuakeClient, adapter, MAGNITUDE_TEMPLATE);
     }
 
     @GetMapping(PATH)

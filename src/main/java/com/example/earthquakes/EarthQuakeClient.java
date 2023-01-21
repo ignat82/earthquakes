@@ -1,6 +1,6 @@
 package com.example.earthquakes;
 
-import com.example.earthquakes.entities.Location;
+import com.example.earthquakes.comparator.EntriesComparator;
 import com.example.earthquakes.entities.QuakeEntry;
 import com.example.earthquakes.filter.Filter;
 import lombok.Getter;
@@ -33,40 +33,22 @@ public class EarthQuakeClient {
                                                   .collect(Collectors.toCollection(ArrayList::new)));
     }
 
-    public ArrayList<QuakeEntry> filterByClosestTo(long howMany,
-                                                   Location from) {
-        ArrayList<QuakeEntry> quakeData = deepCopy(quakeEntries).orElseGet(ArrayList::new);
-        ArrayList<QuakeEntry> answer = new ArrayList<>();
-        if (quakeData.isEmpty()) {
-            return new ArrayList<>();
-        }
-
+    public Optional<List<QuakeEntry>> getSortedBy(long howMany,
+                                                  EntriesComparator quakeEntryComparator) {
+        log.info("sorting with comparator {}", quakeEntryComparator.getName());
+        List<QuakeEntry> quakeData
+                = deepCopy(quakeEntries).orElseGet(ArrayList::new);
+        List<QuakeEntry> sortedEntries = new ArrayList<>();
         while (howMany-- > 0 && !quakeData.isEmpty()) {
-            QuakeEntry nearestQuake
-                    = Collections.min(quakeData, (q1, q2) -> Float.compare(
-                            q1.getLocation().distanceTo(from),
-                            q2.getLocation().distanceTo(from)));
-            answer.add(nearestQuake);
-            log.info("added with maxDistance {}", nearestQuake.getLocation().distanceTo(from));
+            QuakeEntry nearestQuake = Collections.min(quakeData, quakeEntryComparator);
+            sortedEntries.add(nearestQuake);
             quakeData.remove(nearestQuake);
         }
-        return answer;
+        return Optional.of(sortedEntries);
     }
 
-    public ArrayList<QuakeEntry> filterByLargest(long howMany) {
-        ArrayList<QuakeEntry> quakeData = deepCopy(quakeEntries).orElseGet(ArrayList::new);
-        ArrayList<QuakeEntry> answer = new ArrayList<>();
-        if (quakeData.isEmpty()) {
-            return new ArrayList<>();
-        }
-        while (howMany-- > 0 && !quakeData.isEmpty()) {
-            QuakeEntry largestQuake = Collections.max(
-                    quakeData, Comparator.comparingDouble(QuakeEntry::getMagnitude));
-            answer.add(largestQuake);
-            log.info("added with magmituge {}", largestQuake.getMagnitude());
-            quakeData.remove(largestQuake);
-        }
-        return answer;
+    Optional<List<QuakeEntry>> getAllSortedBy(EntriesComparator quakeEntryComparator) {
+        return getSortedBy(quakeEntries.get().size(), quakeEntryComparator);
     }
 
     public Optional<ArrayList<QuakeEntry>> getEntriesFromFile(String relativePath) {
@@ -92,21 +74,6 @@ public class EarthQuakeClient {
                 qe.getMagnitude(),
                 qe.getInfo());
         }
-    }
-
-    public void closeToMe(){
-        EarthQuakeParser parser = new EarthQuakeParser();
-        String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
-        ArrayList<QuakeEntry> list  = parser.read(source);
-        System.out.println("read data for "+list.size()+" quakes");
-
-        // This location is Durham, NC
-        Location city = new Location(35.988, -78.907);
-
-        // This location is Bridgeport, CA
-        // Location city =  new Location(38.17, -118.82);
-
-        // TODO
     }
 
     public void createCSV(){

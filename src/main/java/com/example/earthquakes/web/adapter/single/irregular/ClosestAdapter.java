@@ -1,6 +1,7 @@
 package com.example.earthquakes.web.adapter.single.irregular;
 
 import com.example.earthquakes.EarthQuakeClient;
+import com.example.earthquakes.comparator.DistanceComparator;
 import com.example.earthquakes.entities.Location;
 import com.example.earthquakes.entities.QuakeEntry;
 import com.example.earthquakes.web.adapter.AbstractAdapter;
@@ -26,7 +27,7 @@ public class ClosestAdapter extends AbstractAdapter {
             double lon = Double.parseDouble(form.getLongitude());
             long numb = Long.parseLong(form.getHowMany());
             Location location = new Location(lat, lon);
-            return  Optional.of(earthQuakeClient.filterByClosestTo(numb, location));
+            return  earthQuakeClient.getSortedBy(numb, new DistanceComparator(location));
         } catch (Exception e) {
             return Optional.empty();
         }
