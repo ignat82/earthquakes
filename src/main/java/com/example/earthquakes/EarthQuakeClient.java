@@ -3,6 +3,8 @@ package com.example.earthquakes;
 import com.example.earthquakes.comparator.EntriesComparator;
 import com.example.earthquakes.entities.QuakeEntry;
 import com.example.earthquakes.filter.Filter;
+import com.example.earthquakes.sorting.QuakeSort;
+import com.example.earthquakes.sorting.QuakeSortBubble;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +12,9 @@ import org.springframework.stereotype.Component;
 
 import java.net.URL;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.example.earthquakes.entities.Constants.SOURCE_FILE_LOCATION;
@@ -19,12 +23,15 @@ import static com.example.earthquakes.entities.Constants.SOURCE_FILE_LOCATION;
 @Slf4j
 public class EarthQuakeClient {
     private final EarthQuakeParser earthQuakeParser;
+    private final QuakeSort quakeSortUtil;
     @Getter
     @Setter
     private Optional<ArrayList<QuakeEntry>> quakeEntries;
-    public EarthQuakeClient(EarthQuakeParser earthQuakeParser) {
+    public EarthQuakeClient(EarthQuakeParser earthQuakeParser,
+                            QuakeSortBubble quakeSortUtil) {
         this.earthQuakeParser = earthQuakeParser;
         quakeEntries = getEntriesFromFile(SOURCE_FILE_LOCATION);
+        this.quakeSortUtil = quakeSortUtil;
     }
 
     public Optional<List<QuakeEntry>> getFilteredEntries(Filter filter) {
@@ -33,12 +40,15 @@ public class EarthQuakeClient {
                                                   .collect(Collectors.toCollection(ArrayList::new)));
     }
 
-    public Optional<List<QuakeEntry>> getSortedBy(long howMany,
+    public Optional<List<QuakeEntry>> getSortedBy(int howMany,
                                                   EntriesComparator quakeEntryComparator) {
         log.info("sorting with comparator {}", quakeEntryComparator.getName());
+
         List<QuakeEntry> quakeData
                 = deepCopy(quakeEntries).orElseGet(ArrayList::new);
         log.info("quake data has {} entries", quakeData.size());
+        List<QuakeEntry> sortedEntries = quakeSortUtil.sortBy(quakeData, howMany, quakeEntryComparator);
+        /*
         List<QuakeEntry> sortedEntries = new ArrayList<>();
         while (howMany-- > 0 && !quakeData.isEmpty()) {
             QuakeEntry nearestQuake = Collections.min(quakeData, quakeEntryComparator);
@@ -46,6 +56,7 @@ public class EarthQuakeClient {
             sortedEntries.add(nearestQuake);
             quakeData.remove(nearestQuake);
         }
+        */
         return Optional.of(sortedEntries);
     }
 
